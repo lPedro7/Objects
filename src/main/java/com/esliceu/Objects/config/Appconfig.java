@@ -2,13 +2,18 @@ package com.esliceu.Objects.config;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -18,7 +23,12 @@ import javax.sql.DataSource;
 @EnableWebMvc
 @ComponentScan("com.esliceu.Objects")
 @PropertySource("classpath:application.properties")
-public class Appconfig {
+public class Appconfig implements WebMvcConfigurer {
+
+    @Autowired
+    @Qualifier("authInt")
+    private HandlerInterceptor authInterceptor;
+
     @Bean
     public UrlBasedViewResolver viewResolver(){
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
@@ -44,4 +54,11 @@ public class Appconfig {
     public JdbcTemplate getJdbcTemplate(DataSource dataSource){
         return new JdbcTemplate(dataSource);
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInterceptor)
+                .addPathPatterns("/private/**");
+    }
+
 }
