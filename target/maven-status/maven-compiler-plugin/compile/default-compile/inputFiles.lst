@@ -4,6 +4,8 @@ C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\es
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\model\User.java
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\services\UserService.java
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\daos\UserDaoImpl.java
+C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\controllers\SettingsController.java
+C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\utils\Utils.java
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\controllers\LoginController.java
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\config\AppInitializer.java
 C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\java\com\esliceu\Objects\interceptors\AuthInterceptor.java

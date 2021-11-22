@@ -37,11 +37,11 @@ public class LoginController {
     @PostMapping("/login")
     public RedirectView login(Model m, @RequestParam String username, @RequestParam String password){
         if(userService.checkLogin(username,password)){
+            session.removeAttribute("message");
             session.setAttribute("username",username);
-            m.addAttribute("message","Usuari loguejat correctament");
             return new RedirectView("/private/main");
         }else {
-            m.addAttribute("message","Usuari o password incorrectes");
+            session.setAttribute("message","Usuari o password incorrectes");
         }
         return new RedirectView("/login");
 
@@ -61,16 +61,17 @@ public class LoginController {
                          @RequestParam String birthDate,
                          @RequestParam String email){
 
-
-
             if (userService.signup(m,username,password,firstName,lastName,birthDate,email)){
-                m.addAttribute("message","Usuari creat correctament");
+                return "login";
             }else {
                 return "signup";
             }
+    }
 
-        return "signup";
-
+    @GetMapping("/logout")
+    public String logout(){
+        session.invalidate();
+        return "login";
     }
 
 }

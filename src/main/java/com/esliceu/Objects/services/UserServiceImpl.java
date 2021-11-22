@@ -2,6 +2,7 @@ package com.esliceu.Objects.services;
 
 import com.esliceu.Objects.daos.UserDAO;
 import com.esliceu.Objects.model.User;
+import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    Utils utils;
 
     @Override
     public boolean checkLogin(String username, String password) {
@@ -67,7 +71,26 @@ public class UserServiceImpl implements UserService {
             System.out.println(e);
             return false;
         }
-
         return false;
+    }
+
+    @Override
+    public void updateUser(String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
+
+    }
+
+    @Override
+    public User getUser(String username) {
+        return userDAO.getUser(username);
+    }
+
+
+    @Override
+    public void deleteUser(Model m, String username, String password) {
+        if (userDAO.getUser(username).getPassword().equals(password)){
+            userDAO.deleteUser(username);
+        }else {
+            m.addAttribute("message","Contrassenya incorrecta");
+        }
     }
 }

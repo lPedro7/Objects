@@ -43,4 +43,9 @@ public class UserDaoImpl implements UserDAO{
                            String email) {
         jdbcTemplate.update("INSERT INTO User(username,password,name,surname,birthDate,email) VALUES(?,?,?,?,?,?)",username,password,firstName,lastName,birthDate,email);
     }
+
+    @Override
+    public void deleteUser(String username) {
+        jdbcTemplate.update("DELETE FROM User WHERE username=?",username);
+    }
 }

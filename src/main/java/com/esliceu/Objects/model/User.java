@@ -1,5 +1,7 @@
 package com.esliceu.Objects.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -52,6 +54,7 @@ public class User {
     }
 
     public Date getBirthDate() {
+
         return birthDate;
     }
 
