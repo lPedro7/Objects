@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
         if (u == null) return false;
 
-        return u.getPassword().equals(password);
+        return u.getPassword().equals(utils.getHash(password));
     }
 
     @Override
@@ -60,10 +61,11 @@ public class UserServiceImpl implements UserService {
                 return false;
             }
 
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+            System.out.println(birthDate);
+            Date date = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
 
             if (userDAO.getUser(username) == null) {
-                userDAO.createUser(username, password, firstName, lastName, date, email);
+                userDAO.createUser(username, utils.getHash(password), firstName, lastName, date, email);
             }else {
                 m.addAttribute("message","Aquest nom d'usuari ja existeix");
             }

@@ -16,14 +16,38 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/private/main">Home</a></li>
+            <li><a href="/private/objects">Home</a></li>
             <li><a href="/private/settings">Settings</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
 <main>
-<h2>    Benvingut, ${username} !</h2>
+    <h2> Benvingut, ${username} !</h2>
+
+    <div>
+        <button><a href="/private/objects/newBucket">Crear nou Bucket</a></button>
+    </div>
+
+    <div>
+
+        <ul>
+            <c:forEach items="${buckets}" var="b">
+            <li>
+                <button>
+                    <a href="/private/objects/${b.uri}">
+                            ${b.uri}
+                    </a>
+                </button>
+            </li>
+            </c:forEach>
+        </ul>
+
+
+
+
+    </div>
+
 </main>
 
 </body>

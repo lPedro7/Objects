@@ -31,6 +31,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(){
+        session.invalidate();
         return "login";
     }
 
@@ -39,7 +40,7 @@ public class LoginController {
         if(userService.checkLogin(username,password)){
             session.removeAttribute("message");
             session.setAttribute("username",username);
-            return new RedirectView("/private/main");
+            return new RedirectView("/private/objects");
         }else {
             session.setAttribute("message","Usuari o password incorrectes");
         }
@@ -49,6 +50,7 @@ public class LoginController {
 
     @GetMapping("/signup")
     public String signup(){
+        session.invalidate();
         return "signup";
     }
 

@@ -16,7 +16,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/private/main">Home</a></li>
+            <li><a href="/private/objects">Home</a></li>
             <li><a href="/private/settings">Settings</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>

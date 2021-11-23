@@ -41,7 +41,9 @@ public class UserDaoImpl implements UserDAO{
                            String lastName,
                            Date birthDate,
                            String email) {
-        jdbcTemplate.update("INSERT INTO User(username,password,name,surname,birthDate,email) VALUES(?,?,?,?,?,?)",username,password,firstName,lastName,birthDate,email);
+        String sql = "INSERT INTO User(username,password,name,surname,birthDate,email) VALUES(?,?,?,?,?,?)";
+        System.out.println(sql);
+        jdbcTemplate.update(sql,username,password,firstName,lastName,birthDate,email);
     }
 
     @Override

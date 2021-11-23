@@ -1,8 +1,12 @@
 package com.esliceu.Objects.utils;
 
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
+import com.google.protobuf.compiler.PluginProtos;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +20,21 @@ public class Utils {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         res = df.format(date);
         return res;
+    }
+
+    public String getHash(String s){
+
+        String sha256hex = Hashing.sha256()
+                .hashString(s, StandardCharsets.UTF_8)
+                .toString();
+
+        return sha256hex;
+    }
+
+    public String getFileExtension(String s){
+
+        return "."+s.split("\\.")[1];
+
     }
 
 }
