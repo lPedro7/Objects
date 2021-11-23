@@ -28,7 +28,7 @@
 
     <div>
 
-    <button><a href="/private/objects/${uri}/newObject">Nou Objecte</a></button>
+    <button><a href="/private/objects/${bucket}/newObject">Nou Objecte</a></button>
 
     </div>
 
@@ -72,7 +72,7 @@
                         ${ob.createdDate}
                     </td>
                     <td>
-                        <button><a href="descarrega">Descarregar</a></button>
+                        <button><a href="/private/objects/${bucket}/${ob.uri}/descarrega">Descarregar</a></button>
                     </td>
                 </tr>
             </c:forEach>

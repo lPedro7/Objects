@@ -20,13 +20,13 @@ public class ObjectDaoImpl implements ObjectDAO{
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public boolean newObject(String uri, byte[] content, int version, int contentLength,String contentType,Date lastModified, Date createdDate,String hash) {
+    public boolean newObject(String uri,String bucketUri, byte[] content, int version, int contentLength,String contentType,Date lastModified, Date createdDate,String hash) {
 
-        String sql = "INSERT INTO Object VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Object VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         String username = (String) session.getAttribute("username");
 
-        int ok = jdbcTemplate.update(sql,uri,username,content,version,contentLength,contentType,lastModified,createdDate,hash);
+        int ok = jdbcTemplate.update(sql,uri,bucketUri,username,content,version,contentLength,contentType,lastModified,createdDate,hash);
 
         if (ok==1) return true;
 
@@ -34,9 +34,9 @@ public class ObjectDaoImpl implements ObjectDAO{
     }
 
     @Override
-    public Obj getObject(String uri) {
+    public Obj getObject(String bucket,String obj) {
 
-        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE uri=?",new BeanPropertyRowMapper<Obj>(Obj.class),uri);
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket,obj);
 
         if (objs.size()>0){
             return objs.get(objs.size()-1);
@@ -47,5 +47,10 @@ public class ObjectDaoImpl implements ObjectDAO{
     @Override
     public List<Obj> objectsFromUser() {
         return jdbcTemplate.query("SELECT * FROM Object WHERE username_owner=?",new BeanPropertyRowMapper<Obj>(Obj.class),(String) session.getAttribute("username"));
+    }
+
+    @Override
+    public List<Obj> objectsFromBucket(String bucket) {
+        return jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket);
     }
 }

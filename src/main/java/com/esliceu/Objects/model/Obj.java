@@ -4,10 +4,11 @@ import java.util.Date;
 
 public class Obj {
     private String uri;
+    private String bucketUri;
     private String username_owner;
     private byte[] content;
     private int version;
-    private int contentLenght;
+    private int contentLength;
     private String contentType;
     private Date lastModified;
     private Date createdDate;
@@ -46,12 +47,12 @@ public class Obj {
         this.version = version;
     }
 
-    public int getContentLenght() {
-        return contentLenght;
+    public int getContentLength() {
+        return contentLength;
     }
 
-    public void setContentLenght(int contentLenght) {
-        this.contentLenght = contentLenght;
+    public void setContentLength(int contentLength) {
+        this.contentLength = contentLength;
     }
 
     public String getContentType() {
@@ -87,4 +88,11 @@ public class Obj {
     }
 
 
+    public String getBucketUri() {
+        return bucketUri;
+    }
+
+    public void setBucketUri(String bucketUri) {
+        this.bucketUri = bucketUri;
+    }
 }

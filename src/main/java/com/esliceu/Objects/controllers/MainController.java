@@ -42,13 +42,13 @@ public class MainController {
         return "newBucket";
     }
 
-    @GetMapping("/private/objects/{uri}")
-    public String seeBucket(@PathVariable String uri,Model m){
+    @GetMapping("/private/objects/{bucket}")
+    public String seeBucket(@PathVariable String bucket,Model m){
 
-        List<Obj> objs = objectService.getObjects();
+        List<Obj> objs = objectService.objectsFromBucket(bucket);
         session.setAttribute("objs",objs);
-        session.setAttribute("uri",uri);
-        m.addAttribute("bucket",uri);
+        session.setAttribute("bucket",bucket);
+        m.addAttribute("bucket",bucket);
         return "seeBucket";
     }
 

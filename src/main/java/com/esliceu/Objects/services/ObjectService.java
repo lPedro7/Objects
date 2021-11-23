@@ -12,7 +12,9 @@ public interface ObjectService {
 
     List<Obj> getObjects();
 
-    Obj getObject(String uri);
+    Obj getObject(String uri,String bucket);
 
-    String getObjName(String uri);
+    String getObjName(String uri,String bucket);
+
+    List<Obj> objectsFromBucket(String bucket);
 }

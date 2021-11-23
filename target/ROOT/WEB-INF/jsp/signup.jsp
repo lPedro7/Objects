@@ -30,7 +30,7 @@
   <label for="lastName">Llinatges</label>
   <input type="text" name="lastName" required>
 
-  <label for="birthDate">Data de Naixement ( dd/MM/yyyy )</label>
+  <label for="birthDate">Data de Naixement ( dd-MM-yyyy )</label>
   <input type="text" name="birthDate" required>
 
   <label for="email">Correu electrònic</label>

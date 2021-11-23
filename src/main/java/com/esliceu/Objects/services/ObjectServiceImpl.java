@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
@@ -29,19 +28,13 @@ public class ObjectServiceImpl implements ObjectService {
     @Override
     public Obj newObject(String bucketUri, String uri, MultipartFile file) {
 
-        System.out.println(file.getOriginalFilename());
-
-
-        String realuri = "/";
-        realuri += bucketUri + "/";
-        realuri += uri;
-
-        Obj exists = objectDAO.getObject(realuri);
+        Obj exists = objectDAO.getObject(uri,bucketUri);
 
 
         Obj obj = new Obj();
         try {
-            obj.setUri(realuri);
+            obj.setUri(uri);
+            obj.setBucketUri(bucketUri);
             obj.setUsername_owner((String) session.getAttribute("username"));
             obj.setContent(file.getBytes());
             if (exists!=null){
@@ -49,16 +42,17 @@ public class ObjectServiceImpl implements ObjectService {
             }else {
                 obj.setVersion(1);
             }
-            obj.setContentLenght(file.getBytes().length);
+            obj.setContentLength(file.getBytes().length);
             obj.setCreatedDate(Date.from(Instant.now()));
             obj.setContentType(utils.getFileExtension(file.getOriginalFilename()));
             obj.setLastModified(Date.from(Instant.now()));
             obj.setHash(String.valueOf(Arrays.hashCode(file.getBytes())));
 
           boolean res =  objectDAO.newObject(obj.getUri(),
+                    obj.getBucketUri(),
                     obj.getContent(),
                     obj.getVersion(),
-                    obj.getContentLenght(),
+                    obj.getContentLength(),
                     obj.getContentType(),
                     obj.getLastModified(),
                     obj.getCreatedDate(),
@@ -82,19 +76,26 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public Obj getObject(String uri) {
-        return objectDAO.getObject(uri);
+    public Obj getObject(String bucket,String object) {
+        return objectDAO.getObject(bucket,object);
     }
 
     @Override
-    public String getObjName(String uri) {
-        Obj obj = objectDAO.getObject(uri);
+    public String getObjName(String bucket,String object) {
+        Obj obj = objectDAO.getObject(bucket,object);
 
-        String[] name = uri.split("\\/");
+        String[] name = object.split("\\/");
 
+        System.out.println(object);
+        System.out.println(obj.getContentType());
         String res = name[name.length-1]+obj.getContentType();
 
         return res;
+    }
+
+    @Override
+    public List<Obj> objectsFromBucket(String bucket) {
+        return objectDAO.objectsFromBucket(bucket);
     }
 
 }

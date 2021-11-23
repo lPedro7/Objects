@@ -27,7 +27,7 @@
 
     <div>
 
-        <form action="/private/objects/${uri}/newObject" method="post" enctype="multipart/form-data">
+        <form action="/private/objects/${bucket}/newObject" method="post" enctype="multipart/form-data">
             <label for="name">Nom de l'objecte</label>
             <input type="text" name="name">
 
