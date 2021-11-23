@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +40,7 @@ public class ObjectController {
     }
 
     @GetMapping("/private/objects/{bucket}/{obj}/descarrega")
-    public String download(HttpServletRequest req, HttpServletResponse resp, @PathVariable String bucket, @PathVariable String obj) {
-
-        System.out.println("Download");
-        System.out.println(obj);
-        System.out.println(bucket);
+    public String download(HttpServletResponse resp, @PathVariable String bucket, @PathVariable String obj) {
 
         Obj object = objectService.getObject(bucket, obj);
 
@@ -62,12 +59,7 @@ public class ObjectController {
         try(InputStream in = new FileInputStream(f);
             OutputStream out = resp.getOutputStream()) {
 
-            byte[] buffer = new byte[object.getContent().length];
-
-            System.out.println(object.getContent());
-            System.out.println(object.getContent().length);
-            System.out.println(object.getContentLength());
-            System.out.println(buffer.length);
+            byte[] buffer = new byte[object.getContentLength()];
 
             int numBytesRead;
             while ((numBytesRead = in.read(buffer)) > 0) {
@@ -80,4 +72,15 @@ public class ObjectController {
         }
         return "descarrega";
     }
+
+    @PostMapping("/private/objects/{bucket}/{obj}/elimina")
+    public RedirectView eliminar(@RequestParam String obj){
+
+        String bucket = (String) session.getAttribute("bucket");
+
+        objectService.deleteObject(bucket,obj);
+
+        return new RedirectView("/private/objects/{bucket}");
+    }
+
 }

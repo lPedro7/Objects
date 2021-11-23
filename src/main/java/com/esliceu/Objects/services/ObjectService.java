@@ -17,4 +17,6 @@ public interface ObjectService {
     String getObjName(String uri,String bucket);
 
     List<Obj> objectsFromBucket(String bucket);
+
+    void deleteObject(String bucket, String obj);
 }

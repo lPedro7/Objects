@@ -53,6 +53,9 @@
                 <th>
                     Descarrega
                 </th>
+                <th>
+                    Elimina
+                </th>
             </tr>
             <c:forEach items="${objs}" var="ob">
                 <tr>
@@ -73,6 +76,12 @@
                     </td>
                     <td>
                         <button><a href="/private/objects/${bucket}/${ob.uri}/descarrega">Descarregar</a></button>
+                    </td>
+                    <td>
+                        <form action="/private/objects/${bucket}/${ob.uri}/elimina" method="post">
+                            <input type="hidden" value="${ob.uri}" name="obj">
+                            <button type="submit">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>

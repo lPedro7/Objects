@@ -53,4 +53,9 @@ public class ObjectDaoImpl implements ObjectDAO{
     public List<Obj> objectsFromBucket(String bucket) {
         return jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket);
     }
+
+    @Override
+    public void deleteObject(String bucket, String obj) {
+        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=?",obj,bucket);
+    }
 }

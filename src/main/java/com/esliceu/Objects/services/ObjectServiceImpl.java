@@ -98,4 +98,9 @@ public class ObjectServiceImpl implements ObjectService {
         return objectDAO.objectsFromBucket(bucket);
     }
 
+    @Override
+    public void deleteObject(String bucket, String obj) {
+        objectDAO.deleteObject(bucket,obj);
+    }
+
 }
