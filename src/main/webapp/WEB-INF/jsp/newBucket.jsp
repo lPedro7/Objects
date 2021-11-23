@@ -16,7 +16,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="/private/main">Home</a></li>
+            <li><a href="/private/objects">Home</a></li>
             <li><a href="/private/settings">Settings</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
@@ -24,6 +24,22 @@
 </header>
 <main>
 <h2>    Benvingut, ${username} !</h2>
+
+    <div>
+
+        <form action="/private/objects/newBucket" method="post">
+            <label for="name">Nom del Bucket</label>
+            <input type="text" name="name">
+
+            <button type="submit">Crear Bucket</button>
+
+        </form>
+
+        <c:if test="${not empty message}">
+            ${message}
+        </c:if>
+    </div>
+
 </main>
 
 </body>
