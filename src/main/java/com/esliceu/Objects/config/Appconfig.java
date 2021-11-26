@@ -1,5 +1,7 @@
 package com.esliceu.Objects.config;
 
+import com.esliceu.Objects.interceptors.CsrfCheckTokenFilter;
+import com.esliceu.Objects.interceptors.CsrfGenerateTokenFilter;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -61,6 +63,7 @@ public class Appconfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/private/**");
+
     }
 
     @Bean(name = "multipartResolver")

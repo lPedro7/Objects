@@ -24,6 +24,8 @@
     <label for="password">Contrassenya</label>
     <input type="password" name="password">
 
+    <input type="hidden" name="csrftoken" value="${csrftoken}">
+
     <button type="submit">Login</button>
 
 </form>

@@ -15,4 +15,5 @@ public interface UserService {
     User getUser(String username);
 
     void deleteUser(Model m, String username, String password);
+
 }

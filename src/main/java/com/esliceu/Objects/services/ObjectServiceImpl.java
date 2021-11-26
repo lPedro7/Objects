@@ -3,15 +3,21 @@ package com.esliceu.Objects.services;
 import com.esliceu.Objects.daos.ObjectDAO;
 import com.esliceu.Objects.model.Obj;
 import com.esliceu.Objects.utils.Utils;
+import com.google.common.io.Files;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ObjectServiceImpl implements ObjectService {
@@ -30,22 +36,26 @@ public class ObjectServiceImpl implements ObjectService {
 
         Obj exists = objectDAO.getObject(uri,bucketUri);
 
+        if (uri.charAt(0)!='/'){
+            uri = "/"+uri;
+        }
 
         Obj obj = new Obj();
         try {
+
             obj.setUri(uri);
             obj.setBucketUri(bucketUri);
             obj.setUsername_owner((String) session.getAttribute("username"));
             obj.setContent(file.getBytes());
             if (exists!=null){
                 obj.setVersion(exists.getVersion()+1);
+                obj.setCreatedDate(exists.getCreatedDate());
             }else {
                 obj.setVersion(1);
+                obj.setCreatedDate(Date.from(Instant.now()));
             }
             obj.setContentLength(file.getBytes().length);
-            obj.setCreatedDate(Date.from(Instant.now()));
             obj.setContentType(utils.getFileExtension(file.getOriginalFilename()));
-            obj.setLastModified(Date.from(Instant.now()));
             obj.setHash(String.valueOf(Arrays.hashCode(file.getBytes())));
 
           boolean res =  objectDAO.newObject(obj.getUri(),
@@ -101,6 +111,65 @@ public class ObjectServiceImpl implements ObjectService {
     @Override
     public void deleteObject(String bucket, String obj) {
         objectDAO.deleteObject(bucket,obj);
+    }
+
+    @Override
+    public List<String> getFolderPath(String bucket, String obj) {
+        return objectDAO.getUri(bucket,obj);
+    }
+
+    @Override
+    public String firstPath(String s) {
+        Pattern pattern = Pattern.compile("[/]+\\w+");
+
+        System.out.println(s);
+
+        Matcher matcher = pattern.matcher(s);
+
+        List<String> res = new ArrayList<>();
+
+        while (matcher.find())res.add(matcher.group());
+
+        return res.get(0);
+    }
+
+    @Override
+    public void download(HttpServletResponse resp,String bucket, String obj) {
+
+        Obj object = getObject(bucket, obj);
+
+        File f = new File(getObjName(bucket, obj));
+
+        try {
+            Files.write(object.getContent(), f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        resp.setContentType("application/octet-stream");
+        resp.setHeader("Content-disposition", "attachment; filename="+getObjName(bucket,obj));
+
+
+        try(InputStream in = new FileInputStream(f);
+            OutputStream out = resp.getOutputStream()) {
+
+            byte[] buffer = new byte[object.getContentLength()];
+
+            int numBytesRead;
+            while ((numBytesRead = in.read(buffer)) > 0) {
+                out.write(buffer, 0, numBytesRead);
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public List<Obj> getAllVersions(String bucket, String obj) {
+        return objectDAO.getAllVersions(bucket,obj);
     }
 
 }

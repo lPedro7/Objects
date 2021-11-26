@@ -13,4 +13,8 @@ public interface ObjectDAO {
     List<Obj> objectsFromBucket(String bucket);
 
     void deleteObject(String bucket, String obj);
+
+    List<String> getUri(String bucket, String obj);
+
+    List<Obj> getAllVersions(String bucket, String obj);
 }

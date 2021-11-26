@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -95,4 +96,5 @@ public class UserServiceImpl implements UserService {
             m.addAttribute("message","Contrassenya incorrecta");
         }
     }
+
 }

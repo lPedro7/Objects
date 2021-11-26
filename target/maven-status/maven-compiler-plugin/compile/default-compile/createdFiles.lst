@@ -8,6 +8,7 @@ com\esliceu\Objects\interceptors\AuthInterceptor.class
 com\esliceu\Objects\config\Appconfig.class
 com\esliceu\Objects\controllers\LoginController.class
 com\esliceu\Objects\daos\UserDAO.class
+com\esliceu\Objects\interceptors\CsrfGenerateTokenFilter.class
 com\esliceu\Objects\services\ObjectServiceImpl.class
 com\esliceu\Objects\controllers\MainController.class
 com\esliceu\Objects\services\BucketService.class
@@ -15,10 +16,10 @@ com\esliceu\Objects\model\Obj.class
 com\esliceu\Objects\model\User.class
 com\esliceu\Objects\services\UserServiceImpl.class
 com\esliceu\Objects\services\UserService.class
+com\esliceu\Objects\interceptors\CsrfCheckTokenFilter.class
 com\esliceu\Objects\services\ObjectService.class
 com\esliceu\Objects\config\AppInitializer.class
 com\esliceu\Objects\model\Metadates.class
 com\esliceu\Objects\utils\Utils.class
 com\esliceu\Objects\daos\ObjectDaoImpl.class
-com\esliceu\Objects\controllers\ObjectController.class
 com\esliceu\Objects\services\BucketServiceImpl.class

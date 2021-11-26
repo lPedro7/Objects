@@ -24,68 +24,39 @@
 </header>
 <main>
 
-<h2>${uri}</h2>
+    <h2>${uri}</h2>
 
     <div>
 
-    <button><a href="/private/objects/${bucket}/newObject">Nou Objecte</a></button>
+        <form action="/private/objects/${bucket}" method="post" enctype="multipart/form-data">
+            <label for="name">Nom de l'objecte</label>
+            <input type="text" name="name">
+
+            <label for="file">Select a file to upload</label>
+            <input type="file" name="file"/>
+            <input type="hidden" name="csrftoken" value="${csrftoken}">
+
+            <button type="submit">Crear Objecte</button>
+
+        </form>
 
     </div>
 
     <div>
-        <table>
-            <tr>
-                <th>
-                    Nom
-                </th>
-                <th>
-                    Tipus
-                </th>
-                <th>
-                    Versió
-                </th>
-                <th>
-                    Ultima Actualització
-                </th>
-                <th>
-                    Data de creació
-                </th>
-                <th>
-                    Descarrega
-                </th>
-                <th>
-                    Elimina
-                </th>
-            </tr>
-            <c:forEach items="${objs}" var="ob">
-                <tr>
-                    <td>
-                        ${ob.uri}
-                    </td>
-                    <td>
-                        ${ob.contentType}
-                    </td>
-                    <td>
-                        ${ob.version}
-                    </td>
-                    <td>
-                        ${ob.lastModified}
-                    </td>
-                    <td>
-                        ${ob.createdDate}
-                    </td>
-                    <td>
-                        <button><a href="/private/objects/${bucket}/${ob.uri}/descarrega">Descarregar</a></button>
-                    </td>
-                    <td>
-                        <form action="/private/objects/${bucket}/${ob.uri}/elimina" method="post">
-                            <input type="hidden" value="${ob.uri}" name="obj">
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
+
+        <ul>
+            <c:forEach items="${nom}" var="obj">
+                <c:set var="letter" value="${obj.charAt(0).toString()}" />
+
+                <c:if test="${letter=='/'}">
+                    <li><a href="/private/objects/${bucket}${obj}">${obj}</a></li>
+                </c:if>
+                <c:if test="${letter!='/'}">
+                    <li><a href="/private/objects/${bucket}/${obj}">${obj}</a></li>
+                </c:if>
             </c:forEach>
-        </table>
+
+        </ul>
     </div>
 
 </main>

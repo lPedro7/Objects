@@ -46,6 +46,7 @@
 
     <label for="confirmPassowrd">Torna a posar la teva contrasenya per confirmar els canvis</label>
     <input type="password" name="confirmPassowrd" required>
+    <input type="hidden" name="csrftoken" value="${csrftoken}">
     <button type="submit">Edita</button>
 
 </form>

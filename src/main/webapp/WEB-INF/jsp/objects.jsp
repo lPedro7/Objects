@@ -26,7 +26,13 @@
     <h2> Benvingut, ${username} !</h2>
 
     <div>
-        <button><a href="/private/objects/newBucket">Crear nou Bucket</a></button>
+        <form action="/private/objects" method="post">
+            <label for="name">Nom del Bucket</label>
+            <input type="text" name="name">
+            <input type="hidden" name="csrftoken" value="${csrftoken}">
+            <button type="submit">Crear Bucket</button>
+
+        </form>
     </div>
 
     <div>

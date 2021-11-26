@@ -49,5 +49,7 @@ CREATE TABLE Object(
 select * from bucket;
 select * from object;
 select * from user;
-
+SELECT uri FROM Object WHERE bucketUri = 'pedro' AND uri LIKE '/carp1%';
 SELECT * FROM Object WHERE bucketUri='pedro' AND uri ='Ejem';
+
+DELETE FROM Object Where uri LIKE 'qwerty2';
