@@ -20,10 +20,7 @@ import javax.annotation.RegEx;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,26 +99,36 @@ public class MainController {
 
     @PostMapping("/private/objects")
     public RedirectView newBucket(@RequestParam String name) {
-        if (bucketService.newBucket(name)) {
-            return new RedirectView("/private/objects");
-        } else {
-            return new RedirectView("/private/newBucket");
+        if (name.length()>1){
+            bucketService.newBucket(name);
         }
+        return new RedirectView("/private/objects/");
     }
 
     @GetMapping("/private/objects/{bucket}/**")
     public String seeObjects(@PathVariable String bucket, HttpServletRequest request) {
 
+        System.out.println("seeObjects");
+
+
         String obj = request.getRequestURI().split("/private/objects/" + bucket)[1];
+        String lastPath = request.getRequestURI();
+
+        String pattern = "[\\/]+\\w+$";
+
+        lastPath = lastPath.split(pattern)[0];
+
+
+        session.setAttribute("lastPath",lastPath);
         if (objectService.getObject(bucket, obj) != null) {
             if (obj.equals(objectService.getObject(bucket, obj).getUri())) {
 
-                List<Obj> allVersions = objectService.getAllVersions(bucket,obj);
-                session.setAttribute("versions",allVersions);
+                List<Obj> allVersions = objectService.getAllVersions(bucket, obj);
+                session.setAttribute("versions", allVersions);
 
-                Obj object = objectService.getObject(bucket,obj);
+                Obj object = objectService.getObject(bucket, obj);
                 System.out.println(object.getUri());
-                session.setAttribute("object",object);
+                session.setAttribute("object", object);
                 return "seeObjectInfo";
             }
         }
@@ -132,28 +139,37 @@ public class MainController {
             objectsPath.set(i, objectsPath.get(i).replace(obj, ""));
             if (objectsPath.get(i).contains("/")) objectsPath.set(i, objectService.firstPath(objectsPath.get(i)));
         }
-        session.setAttribute("url", url);
-        session.setAttribute("objectsPath", objectsPath);
 
+        Set<String> objectsPathSet = new LinkedHashSet<>(objectsPath);
+        session.setAttribute("url", url);
+        session.setAttribute("objectsPath", objectsPathSet);
+
+        return "seeObject";
+    }
+
+    @PostMapping("/private/objects/{bucket}/eliminar")
+    public String deleteBucket(@PathVariable String bucket) {
+        bucketService.deleteBucket(bucket);
         return "seeObject";
     }
 
 
     @PostMapping("/private/objects/{bucket}/**")
-    public String manageObject(HttpServletResponse resp, @RequestParam String action){
+    public String manageObject(HttpServletResponse resp, @RequestParam String action, @RequestParam int version) {
 
         Obj object = (Obj) session.getAttribute("object");
 
         String bucket = object.getBucketUri();
         String uri = object.getUri();
-        switch (action){
+        switch (action) {
             case "download":
-                objectService.download(resp,bucket,uri);
+                objectService.download(resp, bucket, uri, version);
             case "delete":
-                objectService.deleteObject(bucket,uri);
+                objectService.deleteObject(bucket, uri, version);
         }
 
 
         return "seeObject";
     }
+
 }

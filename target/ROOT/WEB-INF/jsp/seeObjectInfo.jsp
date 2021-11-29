@@ -26,6 +26,11 @@
 
     <h2>${object.uri}</h2>
 
+        <div class="lastPath">
+            <button><a href="${lastPath}">Enrere</a></button>
+        </div>
+
+
     <div>
         Informació del objeto
     </div>
@@ -38,12 +43,6 @@
             Propietari : ${object.username_owner}
         </li>
         <li>
-            Content Type : ${object.contentType}
-        </li>
-        <li>
-            Darrera Modificació : ${object.lastModified}
-        </li>
-        <li>
             Data de Creació : ${object.createdDate}
         </li>
 
@@ -51,14 +50,20 @@
             <table>
                 <tr>
                     <th>Versió</th>
+                    <th>Nom Arxiu</th>
                     <th>Hash</th>
                     <th>Data de Creació</th>
                     <th>Propietari</th>
+                    <th>Descarrega</th>
+                    <th>Elimina</th>
                 </tr>
                 <c:forEach items="${versions}" var="version">
                     <tr>
                         <td>
                                 ${version.getVersion()}
+                        </td>
+                        <td>
+                                ${version.getName()}
                         </td>
                         <td>
                                 ${version.getHash()}
@@ -68,6 +73,22 @@
                         </td>
                         <td>
                                 ${version.getUsername_owner()}
+                        </td>
+                        <td>
+                            <form action="?" method="post">
+                                <input type="hidden" name="action" value="download">
+                                <input type="hidden" name="csrftoken" value="${csrftoken}">
+                                <input type="hidden" name="version" value="${version.version}">
+                                <button type="submit">Descarregar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="?" method="post">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="csrftoken" value="${csrftoken}">
+                                <input type="hidden" name="version" value="${version.version}">
+                                <button type="submit">Elimina</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

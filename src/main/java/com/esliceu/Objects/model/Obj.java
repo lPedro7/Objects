@@ -3,6 +3,7 @@ package com.esliceu.Objects.model;
 import java.util.Date;
 
 public class Obj {
+    private String name;
     private String uri;
     private String bucketUri;
     private String username_owner;
@@ -14,6 +15,13 @@ public class Obj {
     private Date createdDate;
     private String hash;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getUri() {
         return uri;

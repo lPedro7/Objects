@@ -36,20 +36,15 @@ CREATE TABLE Object(
 	bucketUri varchar(20),
     username_owner varchar(20),
     content LONGBLOB,
-    version int,
+    version int AUTO_INCREMENT not null,
     contentLength int,
     contentType varchar(10),
     lastModified date,
     createdDate date,
     hash text,
-    PRIMARY KEY(uri,version,username_owner,bucketUri),
+    PRIMARY KEY(version,uri,username_owner,bucketUri),
     FOREIGN KEY(username_owner) REFERENCES User(username),
     FOREIGN KEY (bucketUri) REFERENCES Bucket(uri)
 );
-select * from bucket;
-select * from object;
-select * from user;
-SELECT uri FROM Object WHERE bucketUri = 'pedro' AND uri LIKE '/carp1%';
-SELECT * FROM Object WHERE bucketUri='pedro' AND uri ='Ejem';
 
-DELETE FROM Object Where uri LIKE 'qwerty2';
+SELECT * FROM User;

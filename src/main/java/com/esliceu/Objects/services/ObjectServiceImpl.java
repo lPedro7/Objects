@@ -42,26 +42,20 @@ public class ObjectServiceImpl implements ObjectService {
 
         Obj obj = new Obj();
         try {
-
+            obj.setName(file.getOriginalFilename());
             obj.setUri(uri);
             obj.setBucketUri(bucketUri);
             obj.setUsername_owner((String) session.getAttribute("username"));
             obj.setContent(file.getBytes());
-            if (exists!=null){
-                obj.setVersion(exists.getVersion()+1);
-                obj.setCreatedDate(exists.getCreatedDate());
-            }else {
-                obj.setVersion(1);
-                obj.setCreatedDate(Date.from(Instant.now()));
-            }
+            obj.setCreatedDate(Date.from(Instant.now()));
             obj.setContentLength(file.getBytes().length);
             obj.setContentType(utils.getFileExtension(file.getOriginalFilename()));
             obj.setHash(String.valueOf(Arrays.hashCode(file.getBytes())));
 
-          boolean res =  objectDAO.newObject(obj.getUri(),
+          boolean res =  objectDAO.newObject(obj.getName(),
+                  obj.getUri(),
                     obj.getBucketUri(),
                     obj.getContent(),
-                    obj.getVersion(),
                     obj.getContentLength(),
                     obj.getContentType(),
                     obj.getLastModified(),
@@ -94,13 +88,7 @@ public class ObjectServiceImpl implements ObjectService {
     public String getObjName(String bucket,String object) {
         Obj obj = objectDAO.getObject(bucket,object);
 
-        String[] name = object.split("\\/");
-
-        System.out.println(object);
-        System.out.println(obj.getContentType());
-        String res = name[name.length-1]+obj.getContentType();
-
-        return res;
+        return obj.getName();
     }
 
     @Override
@@ -109,8 +97,8 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public void deleteObject(String bucket, String obj) {
-        objectDAO.deleteObject(bucket,obj);
+    public void deleteObject(String bucket, String obj,int version) {
+        objectDAO.deleteObject(bucket,obj,version);
     }
 
     @Override
@@ -134,7 +122,7 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public void download(HttpServletResponse resp,String bucket, String obj) {
+    public void download(HttpServletResponse resp,String bucket, String obj,int version) {
 
         Obj object = getObject(bucket, obj);
 

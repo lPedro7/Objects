@@ -43,6 +43,13 @@
     </div>
 
     <div>
+        <form action="/private/objects/${bucket}/eliminar" method="post">
+            <input type="hidden" name="csrftoken" value="${csrftoken}">
+            <button type="submit">Eliminar Bucket</button>
+        </form>
+    </div>
+
+    <div>
 
         <ul>
             <c:forEach items="${nom}" var="obj">

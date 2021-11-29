@@ -12,19 +12,19 @@ public interface ObjectService {
 
     List<Obj> getObjects();
 
-    Obj getObject(String uri,String bucket);
+    Obj getObject(String bucket,String obj);
 
     String getObjName(String uri,String bucket);
 
     List<Obj> objectsFromBucket(String bucket);
 
-    void deleteObject(String bucket, String obj);
+    void deleteObject(String bucket, String obj, int version);
 
     List<String> getFolderPath(String bucket, String obj);
 
     String firstPath(String s);
 
-    void download(HttpServletResponse resp, String bucket, String uri);
+    void download(HttpServletResponse resp, String bucket, String uri,int version);
 
 
     List<Obj> getAllVersions(String bucket, String obj);

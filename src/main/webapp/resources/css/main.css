@@ -1,0 +1,14 @@
+:root{
+    --background: #A3D1FA;
+    --container: #D4E2E7;
+}
+
+body {
+    background-color: var(--background);
+    color: white;
+}
+
+#login {
+  background-color: var(--container);
+}
+

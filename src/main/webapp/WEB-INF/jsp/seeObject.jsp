@@ -26,6 +26,10 @@
 </header>
 <main>
 
+    <div class="lastPath">
+        <button><a href="${lastPath}">Enrere</a></button>
+    </div>
+
     <div>
 
         <ul>

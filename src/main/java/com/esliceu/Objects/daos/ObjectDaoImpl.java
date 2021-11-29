@@ -21,13 +21,13 @@ public class ObjectDaoImpl implements ObjectDAO {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public boolean newObject(String uri, String bucketUri, byte[] content, int version, int contentLength, String contentType, Date lastModified, Date createdDate, String hash) {
+    public boolean newObject(String name,String uri, String bucketUri, byte[] content, int contentLength, String contentType, Date lastModified, Date createdDate, String hash) {
 
-        String sql = "INSERT INTO Object VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Object(name,uri,bucketUri,username_owner,content,contentLength,contentType,lastModified,createdDate,hash) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         String username = (String) session.getAttribute("username");
 
-        int ok = jdbcTemplate.update(sql, uri, bucketUri, username, content, version, contentLength, contentType, lastModified, createdDate, hash);
+        int ok = jdbcTemplate.update(sql,name, uri, bucketUri, username, content, contentLength, contentType, lastModified, createdDate, hash);
 
         if (ok == 1) return true;
 
@@ -56,8 +56,8 @@ public class ObjectDaoImpl implements ObjectDAO {
     }
 
     @Override
-    public void deleteObject(String bucket, String obj) {
-        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=?", obj, bucket);
+    public void deleteObject(String bucket, String obj,int version) {
+        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=? AND version=?", obj, bucket,version);
     }
 
     @Override
@@ -81,5 +81,15 @@ public class ObjectDaoImpl implements ObjectDAO {
     @Override
     public List<Obj> getAllVersions(String bucket,String obj) {
         return jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri=?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket,obj);
+    }
+
+    @Override
+    public Obj getObject(String uri, String bucket, int version) {
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
+
+        if (objs.size() > 0) {
+            return objs.get(objs.size() - 1);
+        } else return null;
+
     }
 }

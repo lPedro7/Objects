@@ -11,48 +11,115 @@
 <html>
 <head>
     <title>Registra't</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+<link rel="stylesheet" href="resources/css/main.css">
+
 </head>
 <body>
 
-<h2>Registra't!</h2>
 
-<form action="/signup" method="post">
+<div id="login">
+  <div class="container">
+    <div
+      id="login-row"
+      class="row justify-content-center align-items-center"
+    >
+      <div id="login-column" class="col-md-6">
+        <div id="login-box" class="col-md-12">
+          <form id="login-form" class="form" action="/signup" method="post">
+            <h3 class="text-center text-info">Signup</h3>
+            <div class="form-group">
+              <label for="username" class="text-info">Username:</label
+              ><br />
+              <input
+                type="text"
+                name="username"
+                id="username"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password" class="text-info">Password:</label
+              ><br />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                class="form-control"
+              />
+            </div>
+           
+            <div class="form-group">
+              <label for="firstName" class="text-info">First Name:</label
+              ><br />
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                class="form-control"
+              />
+            </div>
 
-  <label for="username">Usuari</label>
-  <input type="text" name="username" required>
+            <div class="form-group">
+              <label for="lastName" class="text-info">Last Name:</label
+              ><br />
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                class="form-control"
+              />
+            </div>
 
-  <label for="password">Contrassenya</label>
-  <input type="password" name="password" required>
+            <div class="form-group">
+              <label for="birthDate" class="text-info">Birth Date (dd-MM-yyyy):</label
+              ><br />
+              <input
+                type="text"
+                name="birthDate"
+                id="birthDate"
+                class="form-control"
+              />
+            </div>
 
-  <label for="firstName">Nom</label>
-  <input type="text" name="firstName" required>
+            <div class="form-group">
+              <label for="email" class="text-info">Email:</label
+              ><br />
+              <input
+                type="text"
+                name="email"
+                id="email"
+                class="form-control"
+              />
+            </div>
 
-  <label for="lastName">Llinatges</label>
-  <input type="text" name="lastName" required>
+              <input
+                type="submit"
+                name="submit"
+                class="btn btn-info btn-md"
+                value="submit"
+              />
+            </div>
+            <input type="hidden" name="csrftoken" value="${csrftoken}" />
 
-  <label for="birthDate">Data de Naixement ( dd-MM-yyyy )</label>
-  <input type="text" name="birthDate" required>
-
-  <label for="email">Correu electrònic</label>
-  <input type="email" name="email" required>
-
-  <button type="submit">Registrar</button>
-
-</form>
-
-<div>
-  Ja tens compte?<a href="/login"> Logueja't!</a>
+            <div id="login-link" class="text-right">
+              <a href="/login" class="text-info">Login here</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <c:if test="${not empty message}">
   ${message}
 </c:if>
-
-
-<ul>
-  <li>L'usuari ha de tenir mínim 6 caràcters i 20 com a màxim</li>
-  <li>La contrassenya ha de tenir com a mínim 8 caràcters</li>
-</ul>
 
 </body>
 </html>
