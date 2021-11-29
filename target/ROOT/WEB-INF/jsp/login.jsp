@@ -12,6 +12,7 @@ prefix="c" %> <%@ page contentType="text/html;charset=UTF-8" language="java" %>
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/login.css">
   </head>
   <body>
 

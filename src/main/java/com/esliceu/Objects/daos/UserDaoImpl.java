@@ -1,6 +1,7 @@
 package com.esliceu.Objects.daos;
 
 import com.esliceu.Objects.model.User;
+import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,8 +42,11 @@ public class UserDaoImpl implements UserDAO{
                            String lastName,
                            Date birthDate,
                            String email) {
+        username= Utils.unaccent(username);
+        password= Utils.unaccent(password);
+        firstName= Utils.unaccent(firstName);
+        lastName= Utils.unaccent(lastName);
         String sql = "INSERT INTO User(username,password,name,surname,birthDate,email) VALUES(?,?,?,?,?,?)";
-        System.out.println(sql);
         jdbcTemplate.update(sql,username,password,firstName,lastName,birthDate,email);
     }
 

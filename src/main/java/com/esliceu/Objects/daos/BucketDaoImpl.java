@@ -1,6 +1,7 @@
 package com.esliceu.Objects.daos;
 
 import com.esliceu.Objects.model.Bucket;
+import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +23,8 @@ public class BucketDaoImpl implements BucketDAO {
     @Override
     public void createBucket(String uri) {
         String username = (String) session.getAttribute("username");
+
+        username = Utils.unaccent(username);
 
         jdbcTemplate.update("INSERT INTO Bucket VALUES(?,?)",uri,username);
     }

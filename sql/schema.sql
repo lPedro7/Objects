@@ -19,7 +19,8 @@ email varchar(80) not null
 CREATE TABLE Bucket(
 uri varchar(20),
 username_owner varchar(20),
-FOREIGN KEY (username_owner) REFERENCES User(username),
+FOREIGN KEY (username_owner) REFERENCES User(username)
+ON DELETE CASCADE,
 PRIMARY KEY(uri)
 );
 
@@ -28,10 +29,12 @@ CREATE TABLE Metadates(
     metakey varchar(20),
     value varchar(20),
     FOREIGN KEY (uri) REFERENCES Bucket(uri)
+    ON DELETE CASCADE
 );
 
 
 CREATE TABLE Object(
+name varchar(50),
     uri varchar(100),
 	bucketUri varchar(20),
     username_owner varchar(20),
@@ -43,8 +46,8 @@ CREATE TABLE Object(
     createdDate date,
     hash text,
     PRIMARY KEY(version,uri,username_owner,bucketUri),
-    FOREIGN KEY(username_owner) REFERENCES User(username),
+    FOREIGN KEY(username_owner) REFERENCES User(username)
+    ON DELETE CASCADE,
     FOREIGN KEY (bucketUri) REFERENCES Bucket(uri)
+    ON DELETE CASCADE
 );
-
-SELECT * FROM User;

@@ -23,14 +23,14 @@ public class SettingsController {
     @Autowired
     Utils utils;
 
-    @GetMapping("/private/settings")
+    @GetMapping("/settings")
     public String main() {
         session.setAttribute("user", userService.getUser((String) session.getAttribute("username")));
         session.setAttribute("birthDate",utils.DateToString(userService.getUser((String) session.getAttribute("username")).getBirthDate()));
         return "settings";
     }
 
-    @PostMapping("/private/settings")
+    @PostMapping("/settings")
     public String main(@RequestParam String password,
                        @RequestParam String firstName,
                        @RequestParam String lastName,
@@ -43,7 +43,7 @@ public class SettingsController {
         return "settings";
     }
 
-    @PostMapping("/private/deleteUser")
+    @PostMapping("/deleteUser")
     public String deleteUser(Model m, @RequestParam String password){
         userService.deleteUser(m,(String) session.getAttribute("username"),password);
         return "login";

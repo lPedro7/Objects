@@ -30,26 +30,26 @@ public class LoginController {
     HttpSession session;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         session.invalidate();
         return "login";
     }
 
     @PostMapping("/login")
-    public RedirectView login(Model m, @RequestParam String username, @RequestParam String password){
-        if(userService.checkLogin(username,password)){
+    public RedirectView login(Model m, @RequestParam String username, @RequestParam String password) {
+        if (userService.checkLogin(username, password)) {
             session.removeAttribute("message");
-            session.setAttribute("username",username);
-            return new RedirectView("/private/objects");
-        }else {
-            session.setAttribute("message","Usuari o password incorrectes");
+            session.setAttribute("username", username);
+            return new RedirectView("/objects");
+        } else {
+            session.setAttribute("message", "Usuari o password incorrectes");
         }
         return new RedirectView("/login");
 
     }
 
     @GetMapping("/signup")
-    public String signup(){
+    public String signup() {
         session.invalidate();
         return "signup";
     }
@@ -61,17 +61,15 @@ public class LoginController {
                          @RequestParam String firstName,
                          @RequestParam String lastName,
                          @RequestParam String birthDate,
-                         @RequestParam String email){
+                         @RequestParam String email) {
 
-            if (userService.signup(m,username,password,firstName,lastName,birthDate,email)){
-                return "login";
-            }else {
-                return "signup";
-            }
+        userService.signup(m, username, password, firstName, lastName, birthDate, email);
+        return "login";
+
     }
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         session.invalidate();
         return "login";
     }

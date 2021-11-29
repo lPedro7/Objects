@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,6 +44,12 @@ public class Utils {
             if (s.charAt(i)==c)res++;
         }
         return res;
+    }
+
+    public static String unaccent(String src) {
+        return Normalizer
+                .normalize(src, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
     }
 
 }

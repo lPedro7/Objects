@@ -34,7 +34,8 @@ public class ObjectServiceImpl implements ObjectService {
     @Override
     public Obj newObject(String bucketUri, String uri, MultipartFile file) {
 
-        Obj exists = objectDAO.getObject(uri,bucketUri);
+        System.out.println("service");
+        System.out.println(uri);
 
         if (uri.charAt(0)!='/'){
             uri = "/"+uri;

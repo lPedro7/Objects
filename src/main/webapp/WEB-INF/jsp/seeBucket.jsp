@@ -11,13 +11,20 @@
 <html>
 <head>
     <title>Pagina principal</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="resources/css/main.css">
 </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="/private/objects">Home</a></li>
-            <li><a href="/private/settings">Settings</a></li>
+            <li><a href="/objects">Home</a></li>
+            <li><a href="/settings">Settings</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
@@ -28,7 +35,7 @@
 
     <div>
 
-        <form action="/private/objects/${bucket}" method="post" enctype="multipart/form-data">
+        <form action="/objects/${bucket}" method="post" enctype="multipart/form-data">
             <label for="name">Nom de l'objecte</label>
             <input type="text" name="name">
 
@@ -43,7 +50,7 @@
     </div>
 
     <div>
-        <form action="/private/objects/${bucket}/eliminar" method="post">
+        <form action="/objects/${bucket}/eliminar" method="post">
             <input type="hidden" name="csrftoken" value="${csrftoken}">
             <button type="submit">Eliminar Bucket</button>
         </form>
@@ -56,10 +63,10 @@
                 <c:set var="letter" value="${obj.charAt(0).toString()}" />
 
                 <c:if test="${letter=='/'}">
-                    <li><a href="/private/objects/${bucket}${obj}">${obj}</a></li>
+                    <li><a href="/objects/${bucket}${obj}">${obj}</a></li>
                 </c:if>
                 <c:if test="${letter!='/'}">
-                    <li><a href="/private/objects/${bucket}/${obj}">${obj}</a></li>
+                    <li><a href="/objects/${bucket}/${obj}">${obj}</a></li>
                 </c:if>
             </c:forEach>
 

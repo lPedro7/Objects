@@ -18,6 +18,7 @@
       crossorigin="anonymous"
     />
 <link rel="stylesheet" href="resources/css/main.css">
+  <link rel="stylesheet" href="resources/css/login.css">
 
 </head>
 <body>

@@ -39,7 +39,7 @@ public class MainController {
     @Autowired
     Utils utils;
 
-    @GetMapping("/private/objects")
+    @GetMapping("/objects")
     public String main() {
         String username = (String) session.getAttribute("username");
         List<Bucket> buckets = bucketService.bucketsForUser(username);
@@ -48,7 +48,7 @@ public class MainController {
         return "objects";
     }
 
-    @GetMapping("/private/objects/{bucket}")
+    @GetMapping("/objects/{bucket}")
     public String seeBucket(@PathVariable String bucket, Model m) {
 
         List<Obj> objs = objectService.objectsFromBucket(bucket);
@@ -88,7 +88,7 @@ public class MainController {
         return "seeBucket";
     }
 
-    @PostMapping("/private/objects/{bucket}")
+    @PostMapping("/objects/{bucket}")
     public String newObject(@RequestParam String name, @RequestParam("file") MultipartFile file) {
 
         objectService.newObject((String) session.getAttribute("bucket"), name, file);
@@ -97,21 +97,22 @@ public class MainController {
     }
 
 
-    @PostMapping("/private/objects")
+    @PostMapping("/objects")
     public RedirectView newBucket(@RequestParam String name) {
+        System.out.println(name);
         if (name.length()>1){
             bucketService.newBucket(name);
         }
-        return new RedirectView("/private/objects/");
+        return new RedirectView("/objects/");
     }
 
-    @GetMapping("/private/objects/{bucket}/**")
+    @GetMapping("/objects/{bucket}/**")
     public String seeObjects(@PathVariable String bucket, HttpServletRequest request) {
 
         System.out.println("seeObjects");
 
 
-        String obj = request.getRequestURI().split("/private/objects/" + bucket)[1];
+        String obj = request.getRequestURI().split("/objects/" + bucket)[1];
         String lastPath = request.getRequestURI();
 
         String pattern = "[\\/]+\\w+$";
@@ -134,7 +135,7 @@ public class MainController {
         }
 
         List<String> objectsPath = objectService.getFolderPath(bucket, obj);
-        String url = "/private/objects/" + bucket + obj;
+        String url = "/objects/" + bucket + obj;
         for (int i = 0; i < objectsPath.size(); i++) {
             objectsPath.set(i, objectsPath.get(i).replace(obj, ""));
             if (objectsPath.get(i).contains("/")) objectsPath.set(i, objectService.firstPath(objectsPath.get(i)));
@@ -147,14 +148,14 @@ public class MainController {
         return "seeObject";
     }
 
-    @PostMapping("/private/objects/{bucket}/eliminar")
+    @PostMapping("/objects/{bucket}/eliminar")
     public String deleteBucket(@PathVariable String bucket) {
         bucketService.deleteBucket(bucket);
         return "seeObject";
     }
 
 
-    @PostMapping("/private/objects/{bucket}/**")
+    @PostMapping("/objects/{bucket}/**")
     public String manageObject(HttpServletResponse resp, @RequestParam String action, @RequestParam int version) {
 
         Obj object = (Obj) session.getAttribute("object");

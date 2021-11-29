@@ -15,6 +15,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.MappedInterceptor;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -53,14 +54,15 @@ public class Appconfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public JdbcTemplate getJdbcTemplate(DataSource dataSource){
+
         return new JdbcTemplate(dataSource);
     }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/private/**");
-
+                .addPathPatterns("/objects/**","/settings");
     }
 
     @Bean(name = "multipartResolver")

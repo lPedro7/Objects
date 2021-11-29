@@ -11,13 +11,20 @@
 <html>
 <head>
     <title>Settings</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="resources/css/main.css">
 </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="/private/objects">Home</a></li>
-            <li><a href="/private/settings">Settings</a></li>
+            <li><a href="/objects">Home</a></li>
+            <li><a href="/settings">Settings</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
@@ -26,7 +33,7 @@
     <h2> Canvia les teves dades, ${username} !</h2>
 </main>
 
-<form action="/private/settings" method="post">
+<form action="?" method="post">
 
     <label for="password">Contrassenya</label>
     <input type="password" name="password" required>
@@ -52,15 +59,11 @@
 </form>
 
 
-<form action="/private/deleteUser" method="post">
+<form action="/deleteUser" method="post">
     <label for="password">Per seguretat posa la contrassenya</label>
     <input type="password" name="password" required>
     <button type="submit">Eliminar compte</button>
 </form>
-
-<button formaction="/private/deleteUser">
-    Eliminar compte
-</button>
 
 </body>
 </html>

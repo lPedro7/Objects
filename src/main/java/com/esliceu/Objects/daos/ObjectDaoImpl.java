@@ -29,9 +29,8 @@ public class ObjectDaoImpl implements ObjectDAO {
 
         int ok = jdbcTemplate.update(sql,name, uri, bucketUri, username, content, contentLength, contentType, lastModified, createdDate, hash);
 
-        if (ok == 1) return true;
 
-        return false;
+        return ok == 1;
     }
 
     @Override
