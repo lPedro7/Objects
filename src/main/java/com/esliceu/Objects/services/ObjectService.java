@@ -24,8 +24,13 @@ public interface ObjectService {
 
     String firstPath(String s);
 
-    void download(HttpServletResponse resp, String bucket, String uri,int version);
-
-
     List<Obj> getAllVersions(String bucket, String obj);
+
+    void deleteObject(String bucket, String uri);
+
+    void download(HttpServletResponse resp, int id);
+
+    void deleteObject(int id);
+
+    Obj getObject(int id);
 }

@@ -23,7 +23,7 @@ public class Utils {
         return res;
     }
 
-    public String getHash(String s){
+    public String getHash(String s) {
 
         String sha256hex = Hashing.sha256()
                 .hashString(s, StandardCharsets.UTF_8)
@@ -32,24 +32,28 @@ public class Utils {
         return sha256hex;
     }
 
-    public String getFileExtension(String s){
+    public String getFileExtension(String s) {
 
-        return "."+s.split("\\.")[1];
+        return "." + s.split("\\.")[1];
 
     }
 
-    public int countChar(String s,char c){
-      int res = 0;
+    public int countChar(String s, char c) {
+        int res = 0;
         for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i)==c)res++;
+            if (s.charAt(i) == c) res++;
         }
         return res;
     }
 
-    public static String unaccent(String src) {
-        return Normalizer
-                .normalize(src, Normalizer.Form.NFD)
-                .replaceAll("[^\\p{ASCII}]", "");
-    }
+    public static String unaccent(String s) {
 
+        System.out.println("Original text : " + s);
+
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        System.out.println("Text without accents : " + s);
+
+        return s;
+        }
 }

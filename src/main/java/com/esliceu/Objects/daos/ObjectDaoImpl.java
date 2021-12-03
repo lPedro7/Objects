@@ -1,6 +1,7 @@
 package com.esliceu.Objects.daos;
 
 import com.esliceu.Objects.model.Obj;
+import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,16 +22,27 @@ public class ObjectDaoImpl implements ObjectDAO {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public boolean newObject(String name,String uri, String bucketUri, byte[] content, int contentLength, String contentType, Date lastModified, Date createdDate, String hash) {
+    public boolean newObject(String name,String uri, String bucketUri, byte[] content, int contentLength, String contentType, Date lastModified, Date createdDate, String hash, int version) {
 
-        String sql = "INSERT INTO Object(name,uri,bucketUri,username_owner,content,contentLength,contentType,lastModified,createdDate,hash) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        name= Utils.unaccent(name);
+        uri=Utils.unaccent(uri);
+
+        String sql = "INSERT INTO Object(name,uri,bucketUri,username_owner,content,contentLength,contentType,lastModified,createdDate,hash,version) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         String username = (String) session.getAttribute("username");
 
-        int ok = jdbcTemplate.update(sql,name, uri, bucketUri, username, content, contentLength, contentType, lastModified, createdDate, hash);
-
+        int ok = jdbcTemplate.update(sql,name, uri, bucketUri, username, content, contentLength, contentType, lastModified, createdDate, hash,version);
 
         return ok == 1;
+    }
+
+    @Override
+    public Obj getObject(int id) {
+        List<Obj> obj = jdbcTemplate.query("SELECT * FROM Object WHERE id=?",new BeanPropertyRowMapper<Obj>(Obj.class),id);
+        if (obj.size()>0){
+            return obj.get(0);
+        }
+        return null;
     }
 
     @Override
@@ -45,6 +57,14 @@ public class ObjectDaoImpl implements ObjectDAO {
     }
 
     @Override
+    public Obj getObject(String uri, String bucket, int version) {
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
+        if (objs.size() > 0) {
+            return objs.get(objs.size() - 1);
+        } else return null;
+    }
+
+    @Override
     public List<Obj> objectsFromUser() {
         return jdbcTemplate.query("SELECT * FROM Object WHERE username_owner=?", new BeanPropertyRowMapper<Obj>(Obj.class), (String) session.getAttribute("username"));
     }
@@ -56,7 +76,7 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public void deleteObject(String bucket, String obj,int version) {
-        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=? AND version=?", obj, bucket,version);
+        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=? AND version=? AND username_owner=?", obj, bucket,version,session.getAttribute("username"));
     }
 
     @Override
@@ -73,7 +93,6 @@ public class ObjectDaoImpl implements ObjectDAO {
         for (Obj o : objs) {
             uris.add(o.getUri());
         }
-
         return uris;
     }
 
@@ -83,12 +102,12 @@ public class ObjectDaoImpl implements ObjectDAO {
     }
 
     @Override
-    public Obj getObject(String uri, String bucket, int version) {
-        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
+    public void deleteObject(String bucket, String uri) {
+        jdbcTemplate.update("DELETE FROM object WHERE bucketUri=? AND uri=? AND username_owner=?",bucket,uri,session.getAttribute("username"));
+    }
 
-        if (objs.size() > 0) {
-            return objs.get(objs.size() - 1);
-        } else return null;
-
+    @Override
+    public void deleteObject(int id) {
+        jdbcTemplate.update("DELETE FROM object WHERE id=? AND username_owner",id,session.getAttribute("username"));
     }
 }

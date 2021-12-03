@@ -41,6 +41,8 @@ public class ObjectServiceImpl implements ObjectService {
             uri = "/"+uri;
         }
 
+        Obj exists = objectDAO.getObject(bucketUri,uri);
+
         Obj obj = new Obj();
         try {
             obj.setName(file.getOriginalFilename());
@@ -53,6 +55,12 @@ public class ObjectServiceImpl implements ObjectService {
             obj.setContentType(utils.getFileExtension(file.getOriginalFilename()));
             obj.setHash(String.valueOf(Arrays.hashCode(file.getBytes())));
 
+            if (exists != null){
+                obj.setVersion(exists.getVersion()+1);
+            }else {
+                obj.setVersion(1);
+            }
+
           boolean res =  objectDAO.newObject(obj.getName(),
                   obj.getUri(),
                     obj.getBucketUri(),
@@ -61,7 +69,8 @@ public class ObjectServiceImpl implements ObjectService {
                     obj.getContentType(),
                     obj.getLastModified(),
                     obj.getCreatedDate(),
-                    obj.getHash());
+                    obj.getHash(),
+                  obj.getVersion());
 
             if (res){
                 return obj;
@@ -123,11 +132,13 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
-    public void download(HttpServletResponse resp,String bucket, String obj,int version) {
+    public void download(HttpServletResponse resp,int id) {
 
-        Obj object = getObject(bucket, obj);
+        Obj object = getObject(id);
 
-        File f = new File(getObjName(bucket, obj));
+
+        File f = new File(getObjName(object.getBucketUri(), object.getUri()));
+
 
         try {
             Files.write(object.getContent(), f);
@@ -136,7 +147,7 @@ public class ObjectServiceImpl implements ObjectService {
         }
 
         resp.setContentType("application/octet-stream");
-        resp.setHeader("Content-disposition", "attachment; filename="+getObjName(bucket,obj));
+        resp.setHeader("Content-disposition", "attachment; filename="+getObjName(object.getBucketUri(),object.getUri()));
 
 
         try(InputStream in = new FileInputStream(f);
@@ -157,8 +168,27 @@ public class ObjectServiceImpl implements ObjectService {
     }
 
     @Override
+    public void deleteObject(int id) {
+        objectDAO.deleteObject(id);
+    }
+
+    @Override
+    public Obj getObject(int id) {
+        return objectDAO.getObject(id);
+    }
+
+    @Override
     public List<Obj> getAllVersions(String bucket, String obj) {
         return objectDAO.getAllVersions(bucket,obj);
     }
+
+    @Override
+    public void deleteObject(String bucket, String uri) {
+        objectDAO.deleteObject(bucket,uri);
+    }
+
+
+
+
 
 }

@@ -19,32 +19,26 @@ public class BucketDaoImpl implements BucketDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
     @Override
     public void createBucket(String uri) {
         String username = (String) session.getAttribute("username");
-
-        username = Utils.unaccent(username);
-
+        uri = Utils.unaccent(uri);
         jdbcTemplate.update("INSERT INTO Bucket VALUES(?,?)",uri,username);
     }
 
     @Override
     public Bucket getBucket(String uri) {
         String username = (String) session.getAttribute("username");
-
         List<Bucket> buckets = jdbcTemplate.query("SELECT * FROM Bucket WHERE uri=? AND username_owner=?", new BeanPropertyRowMapper<Bucket>(Bucket.class), uri, username);
         if (buckets.size() > 0) {
             return buckets.get(0);
         }
         return null;
-
     }
 
     @Override
     public void deleteBucket(String uri) {
         String username = (String) session.getAttribute("username");
-
         jdbcTemplate.update("DELETE FROM Bucket WHERE uri=? AND username_owner=?",uri,username);
     }
 

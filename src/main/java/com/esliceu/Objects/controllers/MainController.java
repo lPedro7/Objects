@@ -44,38 +44,37 @@ public class MainController {
         String username = (String) session.getAttribute("username");
         List<Bucket> buckets = bucketService.bucketsForUser(username);
         session.setAttribute("buckets", buckets);
-
         return "objects";
+    }
+
+    @PostMapping("/objects")
+    public RedirectView newBucket(@RequestParam String name) {
+
+        if (name.length()>1){
+            bucketService.newBucket(Utils.unaccent(name));
+        }
+        return new RedirectView("/objects/");
     }
 
     @GetMapping("/objects/{bucket}")
     public String seeBucket(@PathVariable String bucket, Model m) {
 
         List<Obj> objs = objectService.objectsFromBucket(bucket);
-
         List<String> nomObjs = new ArrayList<>();
-
-
         String pattern = "[/]+\\w+";
-
 
         for (int i = 0; i < objs.size(); i++) {
 
             if (objs.get(i).getUri().contains("/")) {
-
                 Pattern p = Pattern.compile(pattern);
-
                 Matcher matcher = p.matcher(objs.get(i).getUri());
-
                 List<String> directory = new ArrayList<>();
                 while (matcher.find()) {
                     directory.add(matcher.group());
-
                 }
                 if (!nomObjs.contains(directory.get(0)) && !nomObjs.contains(directory.get(0) + "/")) {
                     nomObjs.add(directory.get(0));
                 }
-
             } else {
                 nomObjs.add(objs.get(i).getUri());
             }
@@ -90,45 +89,23 @@ public class MainController {
 
     @PostMapping("/objects/{bucket}")
     public String newObject(@RequestParam String name, @RequestParam("file") MultipartFile file) {
-
-        objectService.newObject((String) session.getAttribute("bucket"), name, file);
-
+        objectService.newObject((String) session.getAttribute("bucket"), Utils.unaccent(name), file);
         return "objects";
-    }
-
-
-    @PostMapping("/objects")
-    public RedirectView newBucket(@RequestParam String name) {
-        System.out.println(name);
-        if (name.length()>1){
-            bucketService.newBucket(name);
-        }
-        return new RedirectView("/objects/");
     }
 
     @GetMapping("/objects/{bucket}/**")
     public String seeObjects(@PathVariable String bucket, HttpServletRequest request) {
 
-        System.out.println("seeObjects");
-
-
         String obj = request.getRequestURI().split("/objects/" + bucket)[1];
         String lastPath = request.getRequestURI();
-
         String pattern = "[\\/]+\\w+$";
-
         lastPath = lastPath.split(pattern)[0];
-
-
         session.setAttribute("lastPath",lastPath);
         if (objectService.getObject(bucket, obj) != null) {
             if (obj.equals(objectService.getObject(bucket, obj).getUri())) {
-
                 List<Obj> allVersions = objectService.getAllVersions(bucket, obj);
                 session.setAttribute("versions", allVersions);
-
                 Obj object = objectService.getObject(bucket, obj);
-                System.out.println(object.getUri());
                 session.setAttribute("object", object);
                 return "seeObjectInfo";
             }
@@ -148,29 +125,29 @@ public class MainController {
         return "seeObject";
     }
 
-    @PostMapping("/objects/{bucket}/eliminar")
-    public String deleteBucket(@PathVariable String bucket) {
-        bucketService.deleteBucket(bucket);
-        return "seeObject";
+    @PostMapping("/download/{id}")
+    public String download(HttpServletResponse resp,@PathVariable int id){
+        objectService.download(resp,id);
+        return "seeObjectInfo";
     }
 
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable int id){
+        objectService.deleteObject(id);
+        return "objects";
+    }
 
-    @PostMapping("/objects/{bucket}/**")
-    public String manageObject(HttpServletResponse resp, @RequestParam String action, @RequestParam int version) {
+    @PostMapping("/deleteObj/{id}")
+    public String deleteObj(@PathVariable int id){
+        Obj obj = objectService.getObject(id);
+        objectService.deleteObject(obj.getBucketUri(),obj.getUri());
+        return "objects";
+    }
 
-        Obj object = (Obj) session.getAttribute("object");
-
-        String bucket = object.getBucketUri();
-        String uri = object.getUri();
-        switch (action) {
-            case "download":
-                objectService.download(resp, bucket, uri, version);
-            case "delete":
-                objectService.deleteObject(bucket, uri, version);
-        }
-
-
-        return "seeObject";
+    @PostMapping("/deleteBucket/{bucket}")
+    public String deleteBucket(@PathVariable String bucket){
+        bucketService.deleteBucket(bucket);
+        return "objects";
     }
 
 }

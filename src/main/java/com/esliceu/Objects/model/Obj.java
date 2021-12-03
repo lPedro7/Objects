@@ -3,6 +3,7 @@ package com.esliceu.Objects.model;
 import java.util.Date;
 
 public class Obj {
+    private int id;
     private String name;
     private String uri;
     private String bucketUri;
@@ -14,6 +15,15 @@ public class Obj {
     private Date lastModified;
     private Date createdDate;
     private String hash;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getName() {
         return name;

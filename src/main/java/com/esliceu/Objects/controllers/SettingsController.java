@@ -38,7 +38,7 @@ public class SettingsController {
                        @RequestParam String email,
                        @RequestParam String confirmPassowrd) {
 
-        userService.updateUser(password, firstName, lastName, birthDate, email, confirmPassowrd);
+        userService.updateUser(Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassowrd));
 
         return "settings";
     }

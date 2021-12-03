@@ -1,6 +1,7 @@
 package com.esliceu.Objects.controllers;
 
 import com.esliceu.Objects.services.UserService;
+import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,8 +64,13 @@ public class LoginController {
                          @RequestParam String birthDate,
                          @RequestParam String email) {
 
-        userService.signup(m, username, password, firstName, lastName, birthDate, email);
-        return "login";
+        userService.signup(m, Utils.unaccent(username), Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email));
+        if (userService.checkLogin(Utils.unaccent(username),Utils.unaccent(password))){
+            session.setAttribute("username",username);
+            return "objects";
+        }
+        m.addAttribute("message","Error creant l'usuari");
+        return "signup";
 
     }
 
