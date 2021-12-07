@@ -9,6 +9,10 @@ body {
     color: white;
 }
 
+.error{
+    color: red;
+}
+
 .navbar{
     background-color: var(--container);
     color: var(--containerFontColor);

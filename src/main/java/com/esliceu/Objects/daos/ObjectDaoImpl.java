@@ -58,7 +58,11 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public Obj getObject(String uri, String bucket, int version) {
-        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
+        System.out.println("uri " +uri);
+        System.out.println("bucket " +bucket);
+        System.out.println("version " +version);
+
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri=? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
         if (objs.size() > 0) {
             return objs.get(objs.size() - 1);
         } else return null;
@@ -76,7 +80,13 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public void deleteObject(String bucket, String obj,int version) {
-        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=? AND version=? AND username_owner=?", obj, bucket,version,session.getAttribute("username"));
+
+        System.out.println("uri " +obj);
+        System.out.println("bucket " +bucket);
+        System.out.println("version " +version);
+        String username = (String) session.getAttribute("username");
+        System.out.println("username "+username);
+        jdbcTemplate.update("DELETE FROM Object WHERE uri=? AND bucketUri=? AND version=? AND username_owner=?", obj, bucket,version,username);
     }
 
     @Override

@@ -20,7 +20,8 @@ CREATE TABLE Bucket(
 uri varchar(20),
 username_owner varchar(20),
 FOREIGN KEY (username_owner) REFERENCES User(username)
-ON DELETE CASCADE,
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 PRIMARY KEY(uri)
 );
 
@@ -29,25 +30,35 @@ CREATE TABLE Metadates(
     metakey varchar(20),
     value varchar(20),
     FOREIGN KEY (uri) REFERENCES Bucket(uri)
-    ON DELETE CASCADE
 );
 
 
 CREATE TABLE Object(
-name varchar(50),
+	id int unique auto_increment,
+	name varchar(50),
     uri varchar(100),
 	bucketUri varchar(20),
     username_owner varchar(20),
     content LONGBLOB,
-    version int AUTO_INCREMENT not null,
+    version int not null,
     contentLength int,
     contentType varchar(10),
     lastModified date,
     createdDate date,
     hash text,
-    PRIMARY KEY(version,uri,username_owner,bucketUri),
-    FOREIGN KEY(username_owner) REFERENCES User(username)
-    ON DELETE CASCADE,
+    PRIMARY KEY(id,version,uri,username_owner,bucketUri),
+    FOREIGN KEY(username_owner) REFERENCES User(username) 
+	ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (bucketUri) REFERENCES Bucket(uri)
     ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
+
+SELECT * FROM Object WHERE uri='/carp1/carp2/pedro' AND bucketUri ='pedro' AND version=3;
+
+select * from user;
+
+select * from user;
+select * from object;
+select * from bucket;

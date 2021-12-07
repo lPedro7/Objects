@@ -71,12 +71,13 @@ change this template use File | Settings | File Templates. --%>
                             <a href="/signup" class="text-info">Register here</a>
                         </div>
                     </form>
+                    <c:if test="${not empty message}"> ${message} </c:if>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<c:if test="${not empty message}"> ${message} </c:if>
+
 </body>
 </html>

@@ -7,6 +7,7 @@ import com.esliceu.Objects.services.ObjectService;
 import com.esliceu.Objects.utils.Utils;
 import jdk.internal.joptsimple.util.RegexMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.RegEx;
@@ -41,6 +43,7 @@ public class MainController {
 
     @GetMapping("/objects")
     public String main() {
+        session.setAttribute("message","");
         String username = (String) session.getAttribute("username");
         List<Bucket> buckets = bucketService.bucketsForUser(username);
         session.setAttribute("buckets", buckets);
@@ -52,8 +55,10 @@ public class MainController {
 
         if (name.length()>1){
             bucketService.newBucket(Utils.unaccent(name));
+        }else {
+            session.setAttribute("message","Error creant el bucket");
         }
-        return new RedirectView("/objects/");
+        return new RedirectView("/objects");
     }
 
     @GetMapping("/objects/{bucket}")
@@ -132,22 +137,23 @@ public class MainController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable int id){
+    public RedirectView delete(@PathVariable int id){
         objectService.deleteObject(id);
-        return "objects";
+        return new RedirectView("/objects");
     }
 
     @PostMapping("/deleteObj/{id}")
-    public String deleteObj(@PathVariable int id){
+    public RedirectView deleteObj(@PathVariable int id){
         Obj obj = objectService.getObject(id);
+        System.out.println(obj.getBucketUri()+obj.getUri());
         objectService.deleteObject(obj.getBucketUri(),obj.getUri());
-        return "objects";
+        return new RedirectView("/objects");
     }
 
     @PostMapping("/deleteBucket/{bucket}")
-    public String deleteBucket(@PathVariable String bucket){
+    public RedirectView deleteBucket(@PathVariable String bucket){
         bucketService.deleteBucket(bucket);
-        return "objects";
+        return new RedirectView("/objects");
     }
 
 }

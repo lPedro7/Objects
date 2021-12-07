@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8b53294-d177-4ec0-a2a8-3cea05867a44" name="Default Changelist" comment="/private/ quitado">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/SettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/BucketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/BucketDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/BucketDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/BucketDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/ObjectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/ObjectDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/ObjectDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/daos/ObjectDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/model/Obj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/model/Obj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/services/ObjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/services/ObjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/services/ObjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/services/ObjectServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/esliceu/Objects/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/objects.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/objects.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeBucket.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeBucket.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeObject.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeObject.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeObjectInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeObjectInfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/settings.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/settings.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/config/AppInitializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/config/Appconfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/controllers/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/controllers/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/controllers/SettingsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/BucketDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/BucketDaoImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/ObjectDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/ObjectDaoImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/UserDAO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/daos/UserDaoImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/interceptors/AuthInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/interceptors/CsrfCheckTokenFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/interceptors/CsrfGenerateTokenFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/model/Bucket.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/model/Metadates.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/model/Obj.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/BucketService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/BucketServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/ObjectService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/ObjectServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/services/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/classes/com/esliceu/Objects/utils/Utils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/objects.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/objects.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeBucket.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeBucket.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeObject.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeObject.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeObjectInfo.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/seeObjectInfo.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/settings.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/settings.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/WEB-INF/jsp/signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ROOT/resources/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/ROOT/resources/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/SettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/controllers/SettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/BucketDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/BucketDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/ObjectDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/ObjectDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/ObjectDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/daos/ObjectDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/model/Obj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/model/Obj.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/services/ObjectService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/services/ObjectService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/services/ObjectServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/services/ObjectServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/esliceu/Objects/utils/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="218o9V33XTdUiz7CMLOvgj7iDNB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ExPatrons" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.esliceu.Objects.config" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pedro\Dropbox\2daw\21-22\Servidor\Projects\Objects\src\main\webapp\WEB-INF\jsp" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.esliceu.Objects.controllers" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Objects [clean,package,cargo:deploy]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="package" />
+                <option value="cargo:deploy" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8b53294-d177-4ec0-a2a8-3cea05867a44" name="Default Changelist" comment="" />
+      <created>1637331927872</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637331927872</updated>
+      <workItem from="1637331929306" duration="6058000" />
+      <workItem from="1637342343916" duration="7009000" />
+      <workItem from="1637537042185" duration="5578000" />
+      <workItem from="1637590339156" duration="11006000" />
+      <workItem from="1637623272140" duration="12056000" />
+      <workItem from="1637686551307" duration="8154000" />
+      <workItem from="1637706491738" duration="3187000" />
+      <workItem from="1637717601385" duration="4648000" />
+      <workItem from="1637796906943" duration="14064000" />
+      <workItem from="1637859896245" duration="8044000" />
+      <workItem from="1637882706164" duration="3087000" />
+      <workItem from="1637935155487" duration="4343000" />
+      <workItem from="1637940043276" duration="1550000" />
+      <workItem from="1638194975696" duration="11999000" />
+      <workItem from="1638219842404" duration="2439000" />
+      <workItem from="1638292290662" duration="7322000" />
+      <workItem from="1638568780054" duration="470000" />
+    </task>
+    <task id="LOCAL-00001" summary="Inicializando proyecto">
+      <created>1637332676003</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637332676003</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Login y interceptor auth OK">
+      <created>1637346211818</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637346211818</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Logout+Settings OK, pendiente objetos y bucket">
+      <created>1637591107635</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1637591107635</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Creación de objetos OK, pendiente de revision, actualmente haciendo descarga de objetos">
+      <created>1637639171761</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637639171761</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Creación de objetos OK, pendiente de revision, actualmente haciendo descarga de objetos">
+      <created>1637639862087</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1637639862087</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Descarga de archivos">
+      <created>1637693496500</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1637693496500</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Eliminar archivos OK">
+      <created>1637694753194</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1637694753194</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implementando versiones">
+      <created>1637940972137</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1637940972137</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Faltan estilos + permisos">
+      <created>1638202320874</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1638202320874</updated>
+    </task>
+    <task id="LOCAL-00010" summary="/private/ quitado">
+      <created>1638220672663</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1638220672664</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Inicializando proyecto" />
+    <MESSAGE value="Login y interceptor auth OK" />
+    <MESSAGE value="Logout+Settings OK, pendiente objetos y bucket" />
+    <MESSAGE value="Creación de objetos OK, pendiente de revision, actualmente haciendo descarga de objetos" />
+    <MESSAGE value="Descarga de archivos" />
+    <MESSAGE value="Eliminar archivos OK" />
+    <MESSAGE value="Implementando versiones" />
+    <MESSAGE value="Faltan estilos + permisos" />
+    <MESSAGE value="/private/ quitado" />
+    <option name="LAST_COMMIT_MESSAGE" value="/private/ quitado" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/esliceu/Objects/config/Appconfig.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/seeObjectInfo.jsp</url>
+          <line>50</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/MainController.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/esliceu/Objects/controllers/MainController.java</url>
+          <line>90</line>
+          <properties class="com.esliceu.Objects.controllers.MainController">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

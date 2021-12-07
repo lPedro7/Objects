@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     Utils utils;
+
+    @Autowired
+    HttpSession session;
 
     @Override
     public boolean checkLogin(String username, String password) {
@@ -79,6 +83,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
+
+        String username = (String) session.getAttribute("username");
+        User u = userDAO.getUser(username);
+        if (u.getPassword().equals(utils.getHash(confirmPassowrd))){
+            if (password.equals("")){
+                password=u.getPassword();
+            }else {
+                password=utils.getHash(password);
+            }
+            Date date = null;
+            try {
+                date = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            userDAO.updateUser(password,firstName,lastName,date,email);
+        }
+
 
     }
 

@@ -113,15 +113,19 @@
               <a href="/login" class="text-info">Login here</a>
             </div>
           </form>
+          <div class="error">
+            <c:if test="${not empty message}">
+              ${message}
+            </c:if>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<c:if test="${not empty message}">
-  ${message}
-</c:if>
+
 
 </body>
 </html>

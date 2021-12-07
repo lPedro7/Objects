@@ -18,7 +18,7 @@ public class Utils {
 
     public String DateToString(Date date) {
         String res;
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         res = df.format(date);
         return res;
     }

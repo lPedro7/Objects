@@ -22,55 +22,67 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li class="nav-item active"><a class="nav-link" href="/objects">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/settings">Settings</a></li>
-                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <div id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/objects">Objects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/settings">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </nav>
+
 
 </header>
 <main>
     <h2> Benvingut, ${username} !</h2>
 
-    <div>
-        <form action="/objects" onsubmit="actionForm(name)" method="post">
-            <label for="name">Nom del Bucket</label>
-            <input type="text" name="name">
+    <div class="newBucket">
+
+        <form action="/objects" method="post" class="form-inline">
+            <div class="col-auto">
+                <label for="name" class="form-label">Nom del Bucket</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" name="name" class="form-control">
+            </div>
             <input type="hidden" name="csrftoken" value="${csrftoken}">
-            <button type="submit">Crear Bucket</button>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Crear Bucket</button>
+            </div>
 
         </form>
     </div>
 
-    <div>
+    <div class="buckets">
 
-        <ul>
+        <table>
+
+        </table>
+
+        <ul class="list-group">
             <c:forEach items="${buckets}" var="b">
-                <li>
+                <li class="list-group-item">
                     <button>
                         <a href="/objects/${b.uri}">
                                 ${b.uri}
                         </a>
                     </button>
+
                 </li>
+
             </c:forEach>
         </ul>
     </div>
-
-    <script>
-
-
-        function actionForm(str){
-
-            return str.normalize("NFD").replace(/\p{Diacritic}/gu, "")
-
-        }
-
-    </script>
 
 </main>
 </body>
