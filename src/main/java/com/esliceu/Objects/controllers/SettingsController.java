@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,17 +52,25 @@ public class SettingsController {
         if (!birthDate.matches(pattern)) {
             response.setStatus(400);
             session.setAttribute("message","La data no és correcta");
-            return "settings";
+            return"/settings";
         }
+        session.setAttribute("message","");
         userService.updateUser(Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword));
         response.setStatus(200);
-        return "settings";
+        return "/settings";
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser(Model m, @RequestParam String password) {
-        userService.deleteUser(m, (String) session.getAttribute("username"), utils.getHash(password));
-        return "login";
+    public String  deleteUser(HttpServletResponse response,Model m, @RequestParam String password) {
+        if(userService.deleteUser(m, (String) session.getAttribute("username"), utils.getHash(password))){
+            session.setAttribute("message","");
+            response.setStatus(200);
+            return"/login";
+        }else {
+            response.setStatus(400);
+            session.setAttribute("message","La contrassenya no és correcta");
+            return "/settings";
+        }
     }
 
 }

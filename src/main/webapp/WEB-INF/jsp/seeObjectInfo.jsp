@@ -72,7 +72,8 @@
         </li>
 
         <li>
-            <table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-light">
                 <tr>
                     <th>Versió</th>
                     <th>Nom Arxiu</th>
@@ -114,7 +115,7 @@
                     </tr>
                 </c:forEach>
             </table>
-
+            </div>
         </li>
 
     </ul>

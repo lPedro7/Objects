@@ -18,6 +18,8 @@
             crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/objects.css">
+
 </head>
 <body>
 <header>
@@ -70,15 +72,15 @@
 
     <div>
 
-        <ul>
+        <ul class="list-group">
             <c:forEach items="${nom}" var="obj">
                 <c:set var="letter" value="${obj.charAt(0).toString()}" />
 
                 <c:if test="${letter=='/'}">
-                    <li><a href="/objects/${bucket}${obj}">${obj}</a></li>
+                    <li class="list-group-item"><a href="/objects/${bucket}${obj}">${obj}</a></li>
                 </c:if>
                 <c:if test="${letter!='/'}">
-                    <li><a href="/objects/${bucket}/${obj}">${obj}</a></li>
+                    <li class="list-group-item"><a href="/objects/${bucket}/${obj}">${obj}</a></li>
                 </c:if>
             </c:forEach>
 

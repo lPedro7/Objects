@@ -132,11 +132,11 @@
             <container>
               <containerId>tomcat7x</containerId>
               <type>installed</type>
-              <home>C:\Program Files\Apache Software Foundation\Tomcat 9.0</home>
+              <home>C:\Program Files (x86)\Apache Software Foundation\Tomcat 9.0</home>
             </container>
             <configuration>
               <type>existing</type>
-              <home>C:\Program Files\Apache Software Foundation\Tomcat 9.0</home>
+              <home>C:\Program Files (x86)\Apache Software Foundation\Tomcat 9.0</home>
             </configuration>
           </configuration>
         </plugin>

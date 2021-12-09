@@ -51,18 +51,11 @@ change this template use File | Settings | File Templates. --%>
                             />
                         </div>
                         <div class="form-group">
-                            <label for="remember-me" class="text-info"
-                            ><span>Remember me</span> <span
-                            ><input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"/></span></label
-                            ><br/>
                             <input
                                     type="submit"
                                     name="submit"
                                     class="btn btn-info btn-md"
-                                    value="submit"
+                                    value="Login"
                             />
                         </div>
                         <input type="hidden" name="csrftoken" value="${csrftoken}"/>

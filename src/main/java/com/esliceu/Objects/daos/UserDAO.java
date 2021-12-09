@@ -6,12 +6,8 @@ import java.util.List;
 
 public interface UserDAO {
     List<User> getUsers();
-
     User getUser(String username);
-
     void createUser(String username, String password, String firstName, String lastName, Date birthDate, String email);
-
     void deleteUser(String username);
-
     void updateUser(String password, String firstName, String lastName, Date birthDate, String email);
 }

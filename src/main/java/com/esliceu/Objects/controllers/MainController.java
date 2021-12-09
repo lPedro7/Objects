@@ -50,11 +50,13 @@ public class MainController {
         return "objects";
     }
 
+
+
     @PostMapping("/objects")
     public RedirectView newBucket(@RequestParam String name) {
 
         if (name.length()>1){
-            bucketService.newBucket(Utils.unaccent(name));
+            bucketService.newBucket(Utils.unaccent(name.replaceAll("\\s+","")));
         }else {
             session.setAttribute("message","Error creant el bucket");
         }
@@ -64,9 +66,11 @@ public class MainController {
     @GetMapping("/objects/{bucket}")
     public String seeBucket(@PathVariable String bucket, Model m) {
 
+        session.setAttribute("message","");
+
         List<Obj> objs = objectService.objectsFromBucket(bucket);
         List<String> nomObjs = new ArrayList<>();
-        String pattern = "[/]+\\w+";
+        String pattern = "[\\/][^\\/]+$";
 
         for (int i = 0; i < objs.size(); i++) {
 
@@ -94,16 +98,21 @@ public class MainController {
 
     @PostMapping("/objects/{bucket}")
     public String newObject(@RequestParam String name, @RequestParam("file") MultipartFile file) {
-        objectService.newObject((String) session.getAttribute("bucket"), Utils.unaccent(name), file);
+        if (name.length()<1){
+            name = file.getOriginalFilename();
+        }
+        objectService.newObject((String) session.getAttribute("bucket"), Utils.unaccent(name.replaceAll("\\s+","")), file);
         return "objects";
     }
 
     @GetMapping("/objects/{bucket}/**")
     public String seeObjects(@PathVariable String bucket, HttpServletRequest request) {
 
+        session.setAttribute("message","");
+
         String obj = request.getRequestURI().split("/objects/" + bucket)[1];
         String lastPath = request.getRequestURI();
-        String pattern = "[\\/]+\\w+$";
+        String pattern = "[\\/][^\\/]+$";
         lastPath = lastPath.split(pattern)[0];
         session.setAttribute("lastPath",lastPath);
         if (objectService.getObject(bucket, obj) != null) {
@@ -145,7 +154,6 @@ public class MainController {
     @PostMapping("/deleteObj/{id}")
     public RedirectView deleteObj(@PathVariable int id){
         Obj obj = objectService.getObject(id);
-        System.out.println(obj.getBucketUri()+obj.getUri());
         objectService.deleteObject(obj.getBucketUri(),obj.getUri());
         return new RedirectView("/objects");
     }

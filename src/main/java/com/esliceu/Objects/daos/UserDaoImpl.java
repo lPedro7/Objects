@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDAO{
 
     @Override
     public List<User> getUsers() {
-        return jdbcTemplate.query("SELECT * FROM User",new BeanPropertyRowMapper<User>());
+        return jdbcTemplate.query("SELECT * FROM User",new BeanPropertyRowMapper<User>(User.class));
     }
 
     @Override

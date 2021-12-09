@@ -54,11 +54,3 @@ CREATE TABLE Object(
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
-
-SELECT * FROM Object WHERE uri='/carp1/carp2/pedro' AND bucketUri ='pedro' AND version=3;
-
-select * from user;
-
-select * from user;
-select * from object;
-select * from bucket;

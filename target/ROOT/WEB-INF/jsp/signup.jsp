@@ -104,7 +104,7 @@
                 type="submit"
                 name="submit"
                 class="btn btn-info btn-md"
-                value="submit"
+                value="Register"
               />
             </div>
             <input type="hidden" name="csrftoken" value="${csrftoken}" />

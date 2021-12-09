@@ -27,7 +27,6 @@ public class CsrfGenerateTokenFilter extends HttpFilter {
 
         Cache<String, Boolean> tokenCache = getCache(req);
 
-        System.out.println("Dins generate");
         String token = generateTokenString();
         tokenCache.put(token,true);
 

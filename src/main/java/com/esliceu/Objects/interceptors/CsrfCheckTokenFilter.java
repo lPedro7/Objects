@@ -17,7 +17,6 @@ public class CsrfCheckTokenFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 
-        System.out.println("Dins check");
 
         if(!req.getMethod().equalsIgnoreCase("post")){
             chain.doFilter(req,res);

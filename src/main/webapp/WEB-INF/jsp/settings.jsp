@@ -45,7 +45,9 @@
 <main>
 
     <c:if test="${not empty message}">
-        ${message}
+        <div class="error">
+                ${message}
+        </div>
     </c:if>
 
     <div id="settings">
@@ -146,7 +148,6 @@
             </div>
         </div>
     </div>
-
 
 
     <div id="deleteUser">

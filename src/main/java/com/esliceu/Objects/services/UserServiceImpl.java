@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,8 +63,6 @@ public class UserServiceImpl implements UserService {
                 m.addAttribute("Correu electrònic no pot tenir més de 80 caràcters");
                 return false;
             }
-
-            System.out.println(birthDate);
             Date date = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
 
             if (userDAO.getUser(username) == null) {
@@ -75,7 +71,6 @@ public class UserServiceImpl implements UserService {
                 m.addAttribute("message","Aquest nom d'usuari ja existeix");
             }
         } catch (ParseException e) {
-            System.out.println(e);
             return false;
         }
         return false;
@@ -111,11 +106,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void deleteUser(Model m, String username, String password) {
+    public boolean deleteUser(Model m, String username, String password) {
         if (userDAO.getUser(username).getPassword().equals(password)){
             userDAO.deleteUser(username);
+            return true;
         }else {
-            m.addAttribute("message","Contrassenya incorrecta");
+            return false;
         }
     }
 

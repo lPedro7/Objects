@@ -47,7 +47,6 @@
     <h2> Benvingut, ${username} !</h2>
 
     <div class="newBucket">
-
         <form action="/objects" method="post" class="form-inline">
             <div class="col-auto">
                 <label for="name" class="form-label">Nom del Bucket</label>
@@ -59,8 +58,12 @@
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary">Crear Bucket</button>
             </div>
-
         </form>
+        <div class="error">
+            <c:if test="${not empty message}">
+                ${message}
+            </c:if>
+        </div>
     </div>
 
     <div class="buckets">

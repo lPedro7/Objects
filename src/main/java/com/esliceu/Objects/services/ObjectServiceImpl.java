@@ -34,9 +34,6 @@ public class ObjectServiceImpl implements ObjectService {
     @Override
     public Obj newObject(String bucketUri, String uri, MultipartFile file) {
 
-        System.out.println("service");
-        System.out.println(uri);
-
         if (uri.charAt(0)!='/'){
             uri = "/"+uri;
         }
@@ -120,7 +117,6 @@ public class ObjectServiceImpl implements ObjectService {
     public String firstPath(String s) {
         Pattern pattern = Pattern.compile("[/]+\\w+");
 
-        System.out.println(s);
 
         Matcher matcher = pattern.matcher(s);
 

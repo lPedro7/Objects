@@ -1,7 +1,6 @@
 package com.esliceu.Objects.daos;
 
 import com.esliceu.Objects.model.Bucket;
-
 import java.util.List;
 
 public interface BucketDAO {

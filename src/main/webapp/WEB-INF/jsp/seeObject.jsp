@@ -20,6 +20,7 @@
             crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/objects.css">
 
 </head>
 <body>
@@ -50,11 +51,11 @@
         <button><a href="${lastPath}">Enrere</a></button>
     </div>
 
-    <div>
+    <div class="list-group">
 
         <ul>
             <c:forEach items="${objectsPath}" var="object">
-               <li><a href="${url}${object}">${object}</a></li>
+               <li class="list-group-item"><a href="${url}${object}">${object}</a></li>
             </c:forEach>
 
         </ul>

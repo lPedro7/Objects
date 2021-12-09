@@ -24,7 +24,6 @@ public class AppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher",new DispatcherServlet(context));
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
-
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(TMP_FOLDER,
                 MAX_UPLOAD_SIZE, MAX_UPLOAD_SIZE * 2, MAX_UPLOAD_SIZE / 2);
 

@@ -47,13 +47,9 @@ public class Utils {
     }
 
     public static String unaccent(String s) {
-
-        System.out.println("Original text : " + s);
-
         s = Normalizer.normalize(s, Normalizer.Form.NFD);
         s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-        System.out.println("Text without accents : " + s);
-
+        s = s.replaceAll("[`´¨^·]","");
         return s;
         }
 }
