@@ -22,6 +22,9 @@ import javax.annotation.RegEx;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,8 +53,6 @@ public class MainController {
         return "objects";
     }
 
-
-
     @PostMapping("/objects")
     public RedirectView newBucket(@RequestParam String name) {
 
@@ -70,7 +71,7 @@ public class MainController {
 
         List<Obj> objs = objectService.objectsFromBucket(bucket);
         List<String> nomObjs = new ArrayList<>();
-        String pattern = "[\\/][^\\/]+$";
+        String pattern = "^[\\/][^\\/]+";
 
         for (int i = 0; i < objs.size(); i++) {
 
@@ -133,6 +134,9 @@ public class MainController {
         }
 
         Set<String> objectsPathSet = new LinkedHashSet<>(objectsPath);
+
+        String currentUrl = url.replaceAll("^/objects","");
+        session.setAttribute("currentUrl",currentUrl);
         session.setAttribute("url", url);
         session.setAttribute("objectsPath", objectsPathSet);
 

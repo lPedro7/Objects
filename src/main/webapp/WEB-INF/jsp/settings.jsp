@@ -18,6 +18,7 @@
             crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/settings.css">
 </head>
 <body>
 <header>
@@ -147,48 +148,47 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div id="deleteUser">
-        <div class="container">
-            <div
-                    id="deleteUser-row"
-                    class="row justify-content-center align-items-center"
-            >
-                <div id="deleteUser-column" class="col-md-6">
-                    <div id="deleteUser-box" class="col-md-12">
-                        <form id="deleteUser-form" class="form" action="/deleteUser" method="post">
-                            <h3 class="text-center text-info">Elimina el teu compte</h3>
-                            <div class="form-group">
-                                <label for="password" class="text-info">Per seguretat posa la contrasenya:</label
-                                ><br/>
-                                <input
-                                        type="password"
-                                        name="password"
-                                        class="form-control"
-                                        required
-                                />
-                            </div>
+        <div id="deleteUser">
+            <div class="container">
+                <div
+                        id="deleteUser-row"
+                        class="row justify-content-center align-items-center"
+                >
+                    <div id="deleteUser-column" class="col-md-6">
+                        <div id="deleteUser-box" class="col-md-12">
+                            <form id="deleteUser-form" class="form" action="/deleteUser" method="post">
+                                <h3 class="text-center text-info">Elimina el teu compte</h3>
+                                <div class="form-group">
+                                    <label for="password" class="text-info">Per seguretat posa la contrasenya:</label
+                                    ><br/>
+                                    <input
+                                            type="password"
+                                            name="password"
+                                            class="form-control"
+                                            required
+                                    />
+                                </div>
 
-                            <input type="hidden" name="csrftoken" value="${csrftoken}"/>
+                                <input type="hidden" name="csrftoken" value="${csrftoken}"/>
 
 
-                            <div class="form-group">
-                                <input
-                                        type="submit"
-                                        name="submit"
-                                        class="btn btn-info btn-md"
-                                        value="Eliminar Compte"
-                                />
-                            </div>
-                        </form>
+                                <div class="form-group">
+                                    <input
+                                            type="submit"
+                                            name="submit"
+                                            class="btn btn-info btn-md"
+                                            value="Eliminar Compte"
+                                    />
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
 </body>
 </html>

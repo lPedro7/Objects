@@ -8,6 +8,7 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=ISO-8859-1" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <html>
 <head>
     <title>Informació del objecte</title>
@@ -18,6 +19,7 @@
             crossorigin="anonymous"
     />
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/seeObject.css">
 </head>
 <body>
 <header>
@@ -60,18 +62,18 @@
     </div>
 
 
-    <ul>
-        <li>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
             Bucket: ${object.bucketUri}
         </li>
-        <li>
+        <li class="list-group-item">
             Propietari : ${object.username_owner}
         </li>
-        <li>
-            Data de Creació : ${object.createdDate}
+        <li class="list-group-item">
+            Data de Creació : ${fn:replace(object.getCreatedDate(),"00:00:00.0","")}
         </li>
 
-        <li>
+        <li class="list-group-item">
             <div class="table-responsive">
                 <table class="table table-bordered table-light">
                 <tr>
@@ -95,7 +97,7 @@
                                 ${version.getHash()}
                         </td>
                         <td>
-                                ${version.getCreatedDate()}
+                                ${fn:replace(version.getCreatedDate(),"00:00:00.0","")}
                         </td>
                         <td>
                                 ${version.getUsername_owner()}

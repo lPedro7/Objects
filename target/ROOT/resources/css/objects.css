@@ -1,12 +1,21 @@
+
+main{
+    margin-left: 5%;
+}
 .newBucket{
     width: 65%;
     background-color: var(--container);
-    color: var(--containerFontColor);
     padding: 2% 2%;
 }
 
 .buckets{
-    width: 30%;
+    width: 65%;
     justify-content: center;
     align-content: center;
+    background-color: var(--container);
+}
+
+.links{
+    color:black;
+    text-underline: blue;
 }

@@ -68,23 +68,22 @@
 
     <div class="buckets">
 
-        <table>
-
-        </table>
-
-        <ul class="list-group">
-            <c:forEach items="${buckets}" var="b">
-                <li class="list-group-item">
-                    <button>
-                        <a href="/objects/${b.uri}">
-                                ${b.uri}
-                        </a>
-                    </button>
-
-                </li>
+        <table class="table">
+            <tr>
+                <c:forEach items="${buckets}" var="b" varStatus="position">
+                <td>
+                    <a class="links" href="/objects/${b.uri}">
+                            ${b.uri}
+                    </a>
+                </td>
+                <c:if test="${position.count % 5 == 0}">
+            </tr>
+            <tr>
+            </c:if>
 
             </c:forEach>
-        </ul>
+
+        </table>
     </div>
 
 </main>

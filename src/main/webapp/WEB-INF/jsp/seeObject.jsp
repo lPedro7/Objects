@@ -47,6 +47,8 @@
 </header>
 <main>
 
+    <h3>${currentUrl}</h3>
+
     <div class="lastPath">
         <button><a href="${lastPath}">Enrere</a></button>
     </div>
