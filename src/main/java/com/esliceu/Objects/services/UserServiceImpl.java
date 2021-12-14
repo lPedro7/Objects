@@ -6,7 +6,6 @@ import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -80,14 +79,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Model m,String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
+    public boolean updateUser(Model m, String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
 
         String username = (String) session.getAttribute("username");
         User u = userDAO.getUser(username);
         if (u.getPassword().equals(utils.getHash(confirmPassowrd))){
             if (!email.matches("^\\w+@\\w+\\.\\w+$")){
                 m.addAttribute("message","El format del correu no és correcte");
-                return;
+                return false;
             }
             if (password.equals("")){
                 password=u.getPassword();
@@ -102,11 +101,13 @@ public class UserServiceImpl implements UserService {
             }
             userDAO.updateUser(password,firstName,lastName,date,email);
             m.addAttribute("message","S'han realitzat els canvis");
+            return true;
         }else {
             m.addAttribute("message","Contrassenya incorrecta");
         }
 
 
+        return false;
     }
 
     @Override

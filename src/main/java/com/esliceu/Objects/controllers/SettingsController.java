@@ -51,10 +51,16 @@ public class SettingsController {
         if (!birthDate.matches(pattern)) {
             response.setStatus(400);
             m.addAttribute("message","La data no és correcta");
-            return"/settings";
+            return "/settings";
         }
-        userService.updateUser(m,Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword));
-        response.setStatus(200);
+        if(userService.updateUser(m,Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword))){
+
+            try {
+                response.sendRedirect("/settings");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return "/settings";
     }
 
