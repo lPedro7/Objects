@@ -33,14 +33,13 @@ public class SettingsController {
 
     @GetMapping("/settings")
     public String main() {
-        session.setAttribute("message","");
         session.setAttribute("user", userService.getUser((String) session.getAttribute("username")));
         session.setAttribute("birthDate", utils.DateToString(userService.getUser((String) session.getAttribute("username")).getBirthDate()));
         return "settings";
     }
 
     @PostMapping("/settings")
-    public String main(@RequestParam String password,
+    public String main(Model m,@RequestParam String password,
                        @RequestParam String firstName,
                        @RequestParam String lastName,
                        @RequestParam String birthDate,
@@ -51,24 +50,22 @@ public class SettingsController {
         String pattern = "^\\d{2}-\\d{2}-\\d{4}$";
         if (!birthDate.matches(pattern)) {
             response.setStatus(400);
-            session.setAttribute("message","La data no és correcta");
+            m.addAttribute("message","La data no és correcta");
             return"/settings";
         }
-        session.setAttribute("message","");
-        userService.updateUser(Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword));
+        userService.updateUser(m,Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword));
         response.setStatus(200);
         return "/settings";
     }
 
     @PostMapping("/deleteUser")
-    public String  deleteUser(HttpServletResponse response,Model m, @RequestParam String password) {
+    public String deleteUser(HttpServletResponse response,Model m, @RequestParam String password) {
         if(userService.deleteUser(m, (String) session.getAttribute("username"), utils.getHash(password))){
-            session.setAttribute("message","");
             response.setStatus(200);
             return"/login";
         }else {
             response.setStatus(400);
-            session.setAttribute("message","La contrassenya no és correcta");
+            m.addAttribute("message","La contrassenya no és correcta");
             return "/settings";
         }
     }

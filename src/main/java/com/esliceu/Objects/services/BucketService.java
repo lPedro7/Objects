@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 public interface BucketService {
-    boolean newBucket(String uri);
+    boolean newBucket(Model m,String uri);
     void deleteBucket(String uri);
     Bucket getBucket(String uri);
     List<Bucket> bucketsForUser(String s);

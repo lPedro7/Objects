@@ -58,12 +58,13 @@
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary">Crear Bucket</button>
             </div>
+
+            <div class="error">
+                <c:if test="${not empty message}">
+                   Error : ${message}
+                </c:if>
+            </div>
         </form>
-        <div class="error">
-            <c:if test="${not empty message}">
-                ${message}
-            </c:if>
-        </div>
     </div>
 
     <div class="buckets">

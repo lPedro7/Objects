@@ -1,6 +1,7 @@
 package com.esliceu.Objects.services;
 
 import com.esliceu.Objects.model.Obj;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface ObjectService {
 
-    Obj newObject(String bucketUri,String uri, MultipartFile file);
+    Obj newObject(Model m, String bucketUri, String uri, MultipartFile file);
 
     List<Obj> getObjects();
 

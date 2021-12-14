@@ -45,7 +45,7 @@
 </header>
 <main>
 
-    <h2>${uri}</h2>
+    <h2>${bucket}</h2>
 
     <div>
 

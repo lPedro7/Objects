@@ -111,6 +111,6 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public void deleteObject(int id) {
-        jdbcTemplate.update("DELETE FROM object WHERE id=? AND username_owner",id,session.getAttribute("username"));
+        jdbcTemplate.update("DELETE FROM object WHERE id=? AND username_owner=?",id,session.getAttribute("username"));
     }
 }

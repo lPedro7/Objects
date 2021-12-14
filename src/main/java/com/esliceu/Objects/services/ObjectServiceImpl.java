@@ -6,6 +6,7 @@ import com.esliceu.Objects.utils.Utils;
 import com.google.common.io.Files;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ public class ObjectServiceImpl implements ObjectService {
     Utils utils;
 
     @Override
-    public Obj newObject(String bucketUri, String uri, MultipartFile file) {
+    public Obj newObject(Model m, String bucketUri, String uri, MultipartFile file) {
 
         if (uri.charAt(0)!='/'){
             uri = "/"+uri;
@@ -115,8 +116,7 @@ public class ObjectServiceImpl implements ObjectService {
 
     @Override
     public String firstPath(String s) {
-        Pattern pattern = Pattern.compile("[/]+\\w+");
-
+        Pattern pattern = Pattern.compile("^[\\/][^\\/]+");
 
         Matcher matcher = pattern.matcher(s);
 

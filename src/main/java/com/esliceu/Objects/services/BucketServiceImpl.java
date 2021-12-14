@@ -19,15 +19,15 @@ public class BucketServiceImpl implements BucketService{
     BucketDAO bucketDAO;
 
     @Override
-    public boolean newBucket(String uri) {
+    public boolean newBucket(Model m,String uri) {
 
         if (uri.contains("/")){
-            session.setAttribute("message","El nom no pot contenir el caràcter '/'");
+            m.addAttribute("message","El nom no pot contenir el caràcter '/'");
             return false;
         }
 
         if (getBucket(uri) != null){
-            session.setAttribute("message","El nom ja existeix");
+            m.addAttribute("message","El nom ja existeix");
             return false;
         }
 

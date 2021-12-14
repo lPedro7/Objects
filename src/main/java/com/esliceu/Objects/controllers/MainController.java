@@ -22,9 +22,7 @@ import javax.annotation.RegEx;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +44,6 @@ public class MainController {
 
     @GetMapping("/objects")
     public String main() {
-        session.setAttribute("message","");
         String username = (String) session.getAttribute("username");
         List<Bucket> buckets = bucketService.bucketsForUser(username);
         session.setAttribute("buckets", buckets);
@@ -54,21 +51,26 @@ public class MainController {
     }
 
     @PostMapping("/objects")
-    public RedirectView newBucket(@RequestParam String name) {
+    public String newBucket(Model m,HttpServletResponse response,@RequestParam String name) {
 
         if (name.length()>1){
-            bucketService.newBucket(Utils.unaccent(name.replaceAll("\\s+","")));
+            if(!bucketService.newBucket(m,Utils.unaccent(name.replaceAll("\\s+","")))){
+                return "/objects";
+            }
         }else {
-            session.setAttribute("message","Error creant el bucket");
+            m.addAttribute("message","El bucket ha de tenir un nom");
+            return "/objects";
         }
-        return new RedirectView("/objects");
+        try {
+            response.sendRedirect("/objects");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "/objects";
     }
 
     @GetMapping("/objects/{bucket}")
     public String seeBucket(@PathVariable String bucket, Model m) {
-
-        session.setAttribute("message","");
-
         List<Obj> objs = objectService.objectsFromBucket(bucket);
         List<String> nomObjs = new ArrayList<>();
         String pattern = "^[\\/][^\\/]+";
@@ -94,23 +96,23 @@ public class MainController {
         session.setAttribute("objs", objs);
         session.setAttribute("bucket", bucket);
         m.addAttribute("bucket", bucket);
-        return "seeBucket";
+        return "/seeBucket";
     }
 
     @PostMapping("/objects/{bucket}")
-    public String newObject(@RequestParam String name, @RequestParam("file") MultipartFile file) {
+    public RedirectView newObject(Model m,@RequestParam String name, @RequestParam("file") MultipartFile file) {
         if (name.length()<1){
             name = file.getOriginalFilename();
+        }else if (name.charAt(name.length()-1)=='/'){
+            name+=file.getOriginalFilename();
         }
-        objectService.newObject((String) session.getAttribute("bucket"), Utils.unaccent(name.replaceAll("\\s+","")), file);
-        return "objects";
+
+        objectService.newObject(m,(String) session.getAttribute("bucket"), Utils.unaccent(name.replaceAll("\\s+","")), file);
+        return new RedirectView("/objects/"+session.getAttribute("bucket"));
     }
 
     @GetMapping("/objects/{bucket}/**")
     public String seeObjects(@PathVariable String bucket, HttpServletRequest request) {
-
-        session.setAttribute("message","");
-
         String obj = request.getRequestURI().split("/objects/" + bucket)[1];
         String lastPath = request.getRequestURI();
         String pattern = "[\\/][^\\/]+$";

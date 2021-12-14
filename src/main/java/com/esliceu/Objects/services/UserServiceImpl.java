@@ -6,6 +6,7 @@ import com.esliceu.Objects.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -44,44 +45,50 @@ public class UserServiceImpl implements UserService {
         try {
 
             if (username.length() < 6 || username.length() > 20) {
+
                 m.addAttribute("message", "L'usuari ha de tenir entre 6 i 20 caràcters");
                 return false;
             }
-            if (password.length() < 7 || password.length() > 25) {
+            if (password.length() < 7) {
                 m.addAttribute("message", "La contrassenya ha de tenir com a mínim 8 caràcters");
                 return false;
             }
             if (firstName.length() > 30) {
-                m.addAttribute("El nom no pot tenir més de 30 caràcters");
+                m.addAttribute("message","El nom no pot tenir més de 30 caràcters");
                 return false;
             }
             if (lastName.length() > 30) {
-                m.addAttribute("El llinatge no pot tenir més de 30 caràcters");
+                m.addAttribute("message","El llinatge no pot tenir més de 30 caràcters");
                 return false;
             }
-            if (email.length() > 80) {
-                m.addAttribute("Correu electrònic no pot tenir més de 80 caràcters");
+            if (!birthDate.matches("^[0-3][0-9]-[0-1][0-9]-\\d{4}$")){
+                m.addAttribute("message","El format de la data no és correcte");
+                return false;
+            }
+            if (!email.matches("^\\w+@\\w+\\.\\w+$")) {
+                m.addAttribute("message","El format del correu electrònic no és correcte");
                 return false;
             }
             Date date = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
 
-            if (userDAO.getUser(username) == null) {
                 userDAO.createUser(username, utils.getHash(password), firstName, lastName, date, email);
-            }else {
-                m.addAttribute("message","Aquest nom d'usuari ja existeix");
-            }
+
         } catch (ParseException e) {
             return false;
         }
-        return false;
+        return true;
     }
 
     @Override
-    public void updateUser(String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
+    public void updateUser(Model m,String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
 
         String username = (String) session.getAttribute("username");
         User u = userDAO.getUser(username);
         if (u.getPassword().equals(utils.getHash(confirmPassowrd))){
+            if (!email.matches("^\\w+@\\w+\\.\\w+$")){
+                m.addAttribute("message","El format del correu no és correcte");
+                return;
+            }
             if (password.equals("")){
                 password=u.getPassword();
             }else {
@@ -94,6 +101,9 @@ public class UserServiceImpl implements UserService {
                 e.printStackTrace();
             }
             userDAO.updateUser(password,firstName,lastName,date,email);
+            m.addAttribute("message","S'han realitzat els canvis");
+        }else {
+            m.addAttribute("message","Contrassenya incorrecta");
         }
 
 
@@ -111,6 +121,7 @@ public class UserServiceImpl implements UserService {
             userDAO.deleteUser(username);
             return true;
         }else {
+            m.addAttribute("message","Contrassenya Incorrecta");
             return false;
         }
     }
