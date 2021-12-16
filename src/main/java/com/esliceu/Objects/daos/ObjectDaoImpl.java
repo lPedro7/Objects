@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class ObjectDaoImpl implements ObjectDAO {
@@ -48,7 +49,7 @@ public class ObjectDaoImpl implements ObjectDAO {
     @Override
     public Obj getObject(String bucket, String obj) {
 
-        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri =?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, obj);
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE LOWER(bucketUri)=? AND LOWER(uri) =?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket.toLowerCase(), obj.toLowerCase());
 
         if (objs.size() > 0) {
             return objs.get(objs.size() - 1);
@@ -59,7 +60,7 @@ public class ObjectDaoImpl implements ObjectDAO {
     @Override
     public Obj getObject(String uri, String bucket, int version) {
 
-        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri=? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket, uri,version);
+        List<Obj> objs = jdbcTemplate.query("SELECT * FROM Object WHERE LOWER(bucketUri)=? AND LOWER(uri)=? AND version=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket.toLowerCase(), uri.toLowerCase(),version);
         if (objs.size() > 0) {
             return objs.get(objs.size() - 1);
         } else return null;
@@ -67,12 +68,12 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public List<Obj> objectsFromUser() {
-        return jdbcTemplate.query("SELECT * FROM Object WHERE username_owner=?", new BeanPropertyRowMapper<Obj>(Obj.class), (String) session.getAttribute("username"));
+        return jdbcTemplate.query("SELECT * FROM Object WHERE LOWER(username_owner)=?", new BeanPropertyRowMapper<Obj>(Obj.class), ((String) session.getAttribute("username")).toLowerCase());
     }
 
     @Override
     public List<Obj> objectsFromBucket(String bucket) {
-        return jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket);
+        return jdbcTemplate.query("SELECT * FROM Object WHERE LOWER(bucketUri)=?", new BeanPropertyRowMapper<Obj>(Obj.class), bucket.toLowerCase());
     }
 
     @Override
@@ -87,9 +88,9 @@ public class ObjectDaoImpl implements ObjectDAO {
 
         obj = obj + "%";
 
-        String sql = "SELECT * FROM Object WHERE bucketUri=? AND uri LIKE ?";
+        String sql = "SELECT * FROM Object WHERE LOWER(bucketUri)=? AND LOWER(uri) LIKE ?";
 
-        List<Obj> objs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Obj>(Obj.class), bucket, obj);
+        List<Obj> objs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Obj>(Obj.class), bucket.toLowerCase(), obj.toLowerCase());
 
         List<String> uris = new ArrayList<>();
 
@@ -101,7 +102,7 @@ public class ObjectDaoImpl implements ObjectDAO {
 
     @Override
     public List<Obj> getAllVersions(String bucket,String obj) {
-        return jdbcTemplate.query("SELECT * FROM Object WHERE bucketUri=? AND uri=?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket,obj);
+        return jdbcTemplate.query("SELECT * FROM Object WHERE LOWER(bucketUri)=? AND LOWER(uri)=?",new BeanPropertyRowMapper<Obj>(Obj.class),bucket.toLowerCase(),obj.toLowerCase());
     }
 
     @Override

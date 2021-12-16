@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,12 +36,14 @@ public class ObjectServiceImpl implements ObjectService {
             uri = "/"+uri;
         }
 
+        uri = uri.replaceAll("[\\/]{2,}","/");
+
         Obj exists = objectDAO.getObject(bucketUri,uri);
 
         Obj obj = new Obj();
         try {
             obj.setName(file.getOriginalFilename());
-            obj.setUri(uri);
+            obj.setUri(uri.toLowerCase());
             obj.setBucketUri(bucketUri);
             obj.setUsername_owner((String) session.getAttribute("username"));
             obj.setContent(file.getBytes());
@@ -123,6 +122,10 @@ public class ObjectServiceImpl implements ObjectService {
         List<String> res = new ArrayList<>();
 
         while (matcher.find())res.add(matcher.group());
+
+        if (res.size()==0){
+            return null;
+        }
 
         return res.get(0);
     }

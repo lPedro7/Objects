@@ -49,7 +49,7 @@ public class Utils {
     public static String unaccent(String s) {
         s = Normalizer.normalize(s, Normalizer.Form.NFD);
         s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-        s = s.replaceAll("[`´¨^·]","");
+        s = s.replaceAll("[`´¨^·!?¿¡()$#@|%&¬{}+\\]\\[:;'=]","");
         return s;
         }
 }

@@ -28,9 +28,9 @@ public class UserDaoImpl implements UserDAO{
     @Override
     public User getUser(String username) {
 
-        List<User> users = jdbcTemplate.query("SELECT * FROM User WHERE username=?",
+        List<User> users = jdbcTemplate.query("SELECT * FROM User WHERE LOWER(username)=?",
                 new BeanPropertyRowMapper<User>(User.class),
-                username);
+                username.toLowerCase());
 
         if (users.size() == 0) return null;
 

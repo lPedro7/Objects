@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class BucketServiceImpl implements BucketService{
@@ -31,7 +32,7 @@ public class BucketServiceImpl implements BucketService{
             return false;
         }
 
-        bucketDAO.createBucket(uri);
+        bucketDAO.createBucket(uri.toLowerCase());
         return true;
     }
 

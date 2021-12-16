@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class BucketDaoImpl implements BucketDAO {
@@ -29,7 +30,7 @@ public class BucketDaoImpl implements BucketDAO {
     @Override
     public Bucket getBucket(String uri) {
         String username = (String) session.getAttribute("username");
-        List<Bucket> buckets = jdbcTemplate.query("SELECT * FROM Bucket WHERE uri=? AND username_owner=?", new BeanPropertyRowMapper<Bucket>(Bucket.class), uri, username);
+        List<Bucket> buckets = jdbcTemplate.query("SELECT * FROM Bucket WHERE LOWER(uri)=? AND LOWER(username_owner)=?", new BeanPropertyRowMapper<Bucket>(Bucket.class), uri.toLowerCase(), username.toLowerCase());
         if (buckets.size() > 0) {
             return buckets.get(0);
         }
@@ -45,6 +46,6 @@ public class BucketDaoImpl implements BucketDAO {
     @Override
     public List<Bucket> getForUser(String s) {
         String username = (String) session.getAttribute("username");
-        return jdbcTemplate.query("SELECT * FROM Bucket WHERE username_owner=?",new BeanPropertyRowMapper<Bucket>(Bucket.class),username);
+        return jdbcTemplate.query("SELECT * FROM Bucket WHERE LOWER(username_owner)=?",new BeanPropertyRowMapper<Bucket>(Bucket.class),username.toLowerCase());
     }
 }
