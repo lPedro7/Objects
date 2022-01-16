@@ -119,6 +119,7 @@ public class MainController {
         lastPath = lastPath.split(pattern)[0];
         session.setAttribute("lastPath",lastPath);
         if (objectService.getObject(bucket, obj) != null) {
+            System.out.println("getObject bucket i obj not null");
             if (obj.equals(objectService.getObject(bucket, obj).getUri())) {
                 List<Obj> allVersions = objectService.getAllVersions(bucket, obj);
                 session.setAttribute("versions", allVersions);
@@ -131,6 +132,7 @@ public class MainController {
         List<String> objectsPath = objectService.getFolderPath(bucket, obj);
         String url = "/objects/" + bucket + obj;
         for (int i = 0; i < objectsPath.size(); i++) {
+            System.out.println(objectsPath.get(i));
             objectsPath.set(i, objectsPath.get(i).replace(obj, ""));
             if (objectsPath.get(i).contains("/")) objectsPath.set(i, objectService.firstPath(objectsPath.get(i)));
         }

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkLogin(String username, String password) {
 
-        User u = userDAO.getUser(username);
+        User u = userDAO.getUserByUsername(username);
 
         if (u == null) return false;
 
@@ -70,7 +70,16 @@ public class UserServiceImpl implements UserService {
             }
             Date date = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
 
-                userDAO.createUser(username, utils.getHash(password), firstName, lastName, date, email);
+            User u = new User();
+            u.setUsername(username);
+            u.setPassword(utils.getHash(password));
+            u.setName(firstName);
+            u.setSurname(lastName);
+            u.setBirthDate(date);
+            u.setEmail(email);
+
+            userDAO.save(u);
+
 
         } catch (ParseException e) {
             return false;
@@ -82,7 +91,7 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(Model m, String password, String firstName, String lastName, String birthDate, String email, String confirmPassowrd) {
 
         String username = (String) session.getAttribute("username");
-        User u = userDAO.getUser(username);
+        User u = userDAO.getUserByUsername(username);
         if (u.getPassword().equals(utils.getHash(confirmPassowrd))){
             if (!email.matches("^\\w+@\\w+\\.\\w+$")){
                 m.addAttribute("message","El format del correu no és correcte");
@@ -112,14 +121,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String username) {
-        return userDAO.getUser(username);
+        return userDAO.getUserByUsername(username);
     }
 
 
     @Override
     public boolean deleteUser(Model m, String username, String password) {
-        if (userDAO.getUser(username).getPassword().equals(password)){
-            userDAO.deleteUser(username);
+        if (userDAO.getUserByUsername(username).getPassword().equals(password)){
+            userDAO.deleteUserByUsername(username);
             return true;
         }else {
             m.addAttribute("message","Contrassenya Incorrecta");

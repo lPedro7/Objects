@@ -19,6 +19,7 @@ public class BucketServiceImpl implements BucketService{
     @Autowired
     BucketDAO bucketDAO;
 
+
     @Override
     public boolean newBucket(Model m,String uri) {
 
@@ -32,23 +33,23 @@ public class BucketServiceImpl implements BucketService{
             return false;
         }
 
-        bucketDAO.createBucket(uri.toLowerCase());
+        bucketDAO.createBucket(uri.toLowerCase(),(String)session.getAttribute("username"));
         return true;
     }
 
     @Override
     public void deleteBucket(String uri) {
-        bucketDAO.deleteBucket(uri);
+        bucketDAO.removeBucketByUri(uri);
     }
 
     @Override
     public Bucket getBucket(String uri) {
-        return bucketDAO.getBucket(uri);
+        return bucketDAO.getBucketByUriAndUsernameOwner(uri,(String) session.getAttribute("username"));
     }
 
     @Override
     public List<Bucket> bucketsForUser(String s) {
-        return bucketDAO.getForUser(s);
+        return bucketDAO.getBucketsByUsernameOwner(s);
     }
 
 

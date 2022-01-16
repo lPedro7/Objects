@@ -1,18 +1,30 @@
 package com.esliceu.Objects.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.util.Date;
 
+@Table("Object")
 public class Obj {
+    @Id
     private int id;
     private String name;
     private String uri;
+    @Column("bucketUri")
     private String bucketUri;
-    private String username_owner;
+    @Column("usernameOwner")
+    private String usernameOwner;
     private byte[] content;
     private int version;
+    @Column("contentLength")
     private int contentLength;
+    @Column("contentType")
     private String contentType;
+    @Column("lastModified")
     private Date lastModified;
+    @Column("createdDate")
     private Date createdDate;
     private String hash;
 
@@ -41,12 +53,12 @@ public class Obj {
         this.uri = uri;
     }
 
-    public String getUsername_owner() {
-        return username_owner;
+    public String getUsernameOwner() {
+        return usernameOwner;
     }
 
-    public void setUsername_owner(String username_owner) {
-        this.username_owner = username_owner;
+    public void setUsernameOwner(String usernameOwner) {
+        this.usernameOwner = usernameOwner;
     }
 
     public byte[] getContent() {

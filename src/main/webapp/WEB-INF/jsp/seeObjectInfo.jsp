@@ -67,7 +67,7 @@
             Bucket: ${object.bucketUri}
         </li>
         <li class="list-group-item">
-            Propietari : ${object.username_owner}
+            Propietari : ${object.usernameOwner}
         </li>
         <li class="list-group-item">
             Data de Creació : ${fn:replace(object.getCreatedDate(),"00:00:00.0","")}
@@ -100,7 +100,7 @@
                                 ${fn:replace(version.getCreatedDate(),"00:00:00.0","")}
                         </td>
                         <td>
-                                ${version.getUsername_owner()}
+                                ${version.getUsernameOwner()}
                         </td>
                         <td>
                             <form action="/download/${version.id}" method="post">

@@ -1,13 +1,20 @@
 package com.esliceu.Objects.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.util.Date;
 
+@Table("User")
 public class User {
+    @Id
     private int id;
     private String username;
     private String password;
     private String name;
     private String surname;
+    @Column("birthDate")
     private Date birthDate;
     private String email;
 
@@ -51,10 +58,7 @@ public class User {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
-
-        return birthDate;
-    }
+    public Date getBirthDate() { return birthDate; }
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;

@@ -73,7 +73,7 @@ public class LoginController {
             m.addAttribute("message","Aquest usuari ja existeix");
             return "/signup";
         }
-        if (userService.signup(m, Utils.unaccent(username), Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email))) {
+        if (userService.signup(m, Utils.unaccent(username), Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, email)) {
             return "/login";
         }
         return "/signup";

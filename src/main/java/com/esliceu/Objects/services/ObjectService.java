@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ObjectService {
 
-    Obj newObject(Model m, String bucketUri, String uri, MultipartFile file);
+    void newObject(Model m, String bucketUri, String uri, MultipartFile file);
 
     List<Obj> getObjects();
 

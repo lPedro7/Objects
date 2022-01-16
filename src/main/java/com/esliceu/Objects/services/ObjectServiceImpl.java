@@ -30,7 +30,7 @@ public class ObjectServiceImpl implements ObjectService {
     Utils utils;
 
     @Override
-    public Obj newObject(Model m, String bucketUri, String uri, MultipartFile file) {
+    public void newObject(Model m, String bucketUri, String uri, MultipartFile file) {
 
         if (uri.charAt(0)!='/'){
             uri = "/"+uri;
@@ -38,14 +38,14 @@ public class ObjectServiceImpl implements ObjectService {
 
         uri = uri.replaceAll("[\\/]{2,}","/");
 
-        Obj exists = objectDAO.getObject(bucketUri,uri);
+        Obj exists = objectDAO.getObjByUriAndBucketUri(bucketUri,uri);
 
         Obj obj = new Obj();
         try {
             obj.setName(file.getOriginalFilename());
             obj.setUri(uri.toLowerCase());
             obj.setBucketUri(bucketUri);
-            obj.setUsername_owner((String) session.getAttribute("username"));
+            obj.setUsernameOwner((String) session.getAttribute("username"));
             obj.setContent(file.getBytes());
             obj.setCreatedDate(Date.from(Instant.now()));
             obj.setContentLength(file.getBytes().length);
@@ -58,59 +58,44 @@ public class ObjectServiceImpl implements ObjectService {
                 obj.setVersion(1);
             }
 
-          boolean res =  objectDAO.newObject(obj.getName(),
-                  obj.getUri(),
-                    obj.getBucketUri(),
-                    obj.getContent(),
-                    obj.getContentLength(),
-                    obj.getContentType(),
-                    obj.getLastModified(),
-                    obj.getCreatedDate(),
-                    obj.getHash(),
-                  obj.getVersion());
-
-            if (res){
-                return obj;
-            }
-            return null;
+            objectDAO.save(obj);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-        return null;
     }
 
     public List<Obj> getObjects(){
-        return objectDAO.objectsFromUser();
+        return objectDAO.getObjsByUsernameOwner((String)session.getAttribute("username"));
     }
 
     @Override
     public Obj getObject(String bucket,String object) {
-        return objectDAO.getObject(bucket,object);
+        return objectDAO.getObjByBucketUriAndUri(bucket,object);
     }
 
     @Override
     public String getObjName(String bucket,String object) {
-        Obj obj = objectDAO.getObject(bucket,object);
+        Obj obj = objectDAO.getObjByBucketUriAndUri(bucket,object);
 
         return obj.getName();
     }
 
     @Override
     public List<Obj> objectsFromBucket(String bucket) {
-        return objectDAO.objectsFromBucket(bucket);
+        return objectDAO.getObjsByBucketUri(bucket);
     }
 
     @Override
     public void deleteObject(String bucket, String obj,int version) {
-        objectDAO.deleteObject(bucket,obj,version);
+        objectDAO.deleteObjByBucketUriAndUriAndVersion(bucket,obj,version);
     }
 
     @Override
     public List<String> getFolderPath(String bucket, String obj) {
-        return objectDAO.getUri(bucket,obj);
+        return objectDAO.getUri(bucket,obj+'%');
     }
 
     @Override
@@ -158,32 +143,30 @@ public class ObjectServiceImpl implements ObjectService {
             while ((numBytesRead = in.read(buffer)) > 0) {
                 out.write(buffer, 0, numBytesRead);
             }
-        } catch (FileNotFoundException fileNotFoundException) {
+        } catch (IOException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
 
     }
 
     @Override
     public void deleteObject(int id) {
-        objectDAO.deleteObject(id);
+        objectDAO.deleteObjById(id);
     }
 
     @Override
     public Obj getObject(int id) {
-        return objectDAO.getObject(id);
+        return objectDAO.getObjById(id);
     }
 
     @Override
     public List<Obj> getAllVersions(String bucket, String obj) {
-        return objectDAO.getAllVersions(bucket,obj);
+        return objectDAO.getObjsByBucketUriAndUri(bucket,obj);
     }
 
     @Override
     public void deleteObject(String bucket, String uri) {
-        objectDAO.deleteObject(bucket,uri);
+        objectDAO.deleteObjsByBucketUriAndUri(bucket,uri);
     }
 
 

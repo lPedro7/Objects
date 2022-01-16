@@ -1,9 +1,14 @@
 package com.esliceu.Objects.model;
 
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("Bucket")
 public class Bucket {
 
     private String uri;
-    private String username_owner;
+    @Column("usernameOwner")
+    private String usernameOwner;
 
     public String getUri() {
         return uri;
@@ -13,11 +18,11 @@ public class Bucket {
         this.uri = uri;
     }
 
-    public String getUsername_owner() {
-        return username_owner;
+    public String getUsernameOwner() {
+        return usernameOwner;
     }
 
-    public void setUsername_owner(String username_owner) {
-        this.username_owner = username_owner;
+    public void setUsernameOwner(String usernameOwner) {
+        this.usernameOwner = usernameOwner;
     }
 }

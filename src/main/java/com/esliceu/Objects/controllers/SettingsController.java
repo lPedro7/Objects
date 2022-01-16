@@ -53,7 +53,7 @@ public class SettingsController {
             m.addAttribute("message","La data no és correcta");
             return "/settings";
         }
-        if(userService.updateUser(m,Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, Utils.unaccent(email), Utils.unaccent(confirmPassword))){
+        if(userService.updateUser(m,Utils.unaccent(password), Utils.unaccent(firstName), Utils.unaccent(lastName), birthDate, email, confirmPassword)){
 
             try {
                 response.sendRedirect("/settings");

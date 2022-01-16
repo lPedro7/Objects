@@ -1,11 +1,14 @@
 package com.esliceu.Objects.services;
 
 import com.esliceu.Objects.model.Bucket;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.ui.Model;
 
 import java.util.List;
 
 public interface BucketService {
+
     boolean newBucket(Model m,String uri);
     void deleteBucket(String uri);
     Bucket getBucket(String uri);

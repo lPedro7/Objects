@@ -10,7 +10,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
+import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,7 +31,8 @@ import javax.sql.DataSource;
 @EnableWebMvc
 @ComponentScan("com.esliceu.Objects")
 @PropertySource("classpath:application.properties")
-public class Appconfig extends WebMvcConfigurerAdapter{
+@EnableJdbcRepositories("com.esliceu.Objects.daos")
+public class Appconfig extends AbstractJdbcConfiguration implements WebMvcConfigurer {
 
     @Autowired
     @Qualifier("authInt")
@@ -75,5 +82,16 @@ public class Appconfig extends WebMvcConfigurerAdapter{
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
+
+    @Bean
+    public NamedParameterJdbcOperations namedParameterJdbcOperations(DataSource dataSource){
+        return new NamedParameterJdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public TransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
+    }
+
 
 }
